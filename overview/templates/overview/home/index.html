@@ -1,0 +1,420 @@
+{% extends "overview/base.html" %} {% load static %} {% block title %} Home {% endblock %} {% block content %}
+<!-- Main Container -->
+<main id="main-container">
+    <!-- Hero -->
+    <div class="bg-image" style="background-image: url({% static 'media/images/AdobeStock_310601380.jpeg' %});">
+        <div class="hero bg-black-75 overflow-hidden">
+            <div class="hero-inner">
+                <div class="content content-full text-center">
+                    <div class="mb-5 invisible" data-toggle="appear" data-class="animated fadeInDown">
+                        <!--<i class="fa fa-circle-notch fa-3x text-primary"></i>-->
+                        <img src="{% static  'media/images/switch_logo.png' %}" height="100">
+                    </div>
+                    <h1 class="display-4 font-w600 mb-3 text-white invisible" data-toggle="appear" data-class="animated fadeInDown">
+                        SWITCH <span class="font-w300"></span>
+                    </h1>
+                    <h2 class="h3 font-w400 text-white-50 mb-5 invisible" data-toggle="appear" data-class="animated fadeInDown" data-timeout="300">
+                        The right way to exchange currency
+                    </h2>
+                    <span class="m-2 d-inline-block invisible" data-toggle="appear" data-class="animated fadeInUp" data-timeout="600">
+                            <a class="btn btn-success px-4 py-2" data-toggle="click-ripple" href="https://1.envato.market/AVD6j">
+                                <i class="fa fa-fw fa-phone mr-1"></i> Request a Demo
+                            </a>
+                        </span>
+                    <span class="m-2 d-inline-block invisible" data-toggle="appear" data-class="animated fadeInUp" data-timeout="600">
+                            <a class="btn btn-primary px-4 py-2" data-toggle="click-ripple" href="{% url 'login-view'%}">
+                                <i class="fa fa-sign-in-alt fa-1x mr-1"></i> Log In 
+                            </a>
+                        </span>
+                </div>
+            </div>
+            <div class="hero-meta">
+                <div class="animated slideInDown infinite">
+                    <i class="fa fa-angle-down text-white-50 fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Hero -->
+
+    <!-- Vue Edition -->
+    <div id="one-vue-edition" class="bg-white">
+        <div class="content content-full">
+            <div class="py-5 text-center">
+                <h2 class="h1 mb-2">
+                    Switch
+                </h2>
+                <h3 class="font-w400 text-muted mb-5">
+                    Switch is an online application that creates a better way to exchange currency
+                </h3>
+                <div class="row justify-content-center">
+                    <div class="col-sm-6 col-xl-5 invisible" data-toggle="appear">
+                        <a href="" class="block block-rounded block-fx-pop">
+                            <div class="block-content block-content-full">
+                                <div class="py-4">
+                                    <img src="{% static 'media/images/official_switch.png' %}" height="100">
+                                </div>
+                                <h4 class="mb-2">About</h4>
+                                <p class="font-size-sm text-muted text-left">
+                                    Switch is an online application created by Peterson Maurice and Jerry Maurice, that solves the problem faced by transfer business communities. TBD
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Vue Edition -->
+
+    <!-- Versions -->
+    <div id="one-versions" class="bg-light">
+        <div class="content content-full">
+            <div class="py-5 text-center">
+                <h2 class="h1 mb-2">
+                    Our Process
+                </h2>
+                <h3 class="font-w400 text-muted mb-5">
+                    Below you will see the steps that we take to create the perfect soluton for our client
+                </h3>
+                <div class="row row-deck">
+                    <div class="col-sm-6 col-xl-3 invisible" data-toggle="appear">
+                        <!-- Get Started Version -->
+                        <div class="block block-rounded block-fx-pop">
+                            <div class="block-content block-content-full">
+                                <div class="py-4">
+                                    <i class="fa fa-4x fa-burn text-modern"></i>
+                                </div>
+                                <h4 class="mb-2">Plan</h4>
+                                <p class="font-size-sm text-muted text-left">
+                                    At switch, we care  for our clients. That is why we create a variety of plans that we think are possible to help  our client. We interview our clients to  see what plan best fit  their business
+                                </p>
+                            </div>
+                        </div>
+                        <!-- END Get Started Version -->
+                    </div>
+                    <div class="col-sm-6 col-xl-3 invisible" data-toggle="appear">
+                        <!-- HTML Version -->
+                        <div class="block block-rounded block-fx-pop">
+                            <div class="block-content block-content-full">
+                                <div class="py-4">
+                                    <img src="{% static 'media/images/build-tools.png' %}" height=70>
+                                </div>
+                                <h4 class="mb-2">Create</h4>
+                                <p class="font-size-sm text-muted text-left">
+                                    
+                                </p>
+                            </div>
+                        </div>
+                        <!-- END HTML Version -->
+                    </div>
+                    <div class="col-sm-6 col-xl-3 invisible" data-toggle="appear">
+                        <!-- PHP Version -->
+                        <div class="block block-rounded block-fx-pop">
+                            <div class="block-content block-content-full">
+                                <div class="py-4">
+                                    <i class="fab fa-4x fa-fire text-amethyst"></i>
+                                </div>
+                                <h4 class="mb-2">Testing</h4>
+                                <p class="font-size-sm text-muted text-left">
+                                </p>
+                            </div>
+                        </div>
+                        <!-- END PHP Version -->
+                    </div>
+                    <div class="col-sm-6 col-xl-3 invisible" data-toggle="appear">
+                        <!-- Laravel Starter Kit -->
+                        <div class="block block-rounded block-fx-pop">
+                            <div class="block-content block-content-full">
+                                <div class="py-4">
+                                    <img src="{% static 'media/images/launch.png' %}" height=70>
+                                </div>
+                                <h4 class="mb-2">Launch</h4>
+                                <p class="font-size-sm text-muted text-left">
+                                    
+                                </p>
+                            </div>
+                        </div>
+                        <!-- END Laravel Starter Kit -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Versions -->
+
+    <!-- Remastered -->
+    <div id="one-remastered" class="bg-white">
+        <div class="content content-full">
+            <div class="py-5 text-center">
+                <h2 class="h1 mb-2">
+                    Plans
+                </h2>
+                <h3 class="font-w400 text-muted mb-5">
+                    The solution to  your problem
+                </h3>
+                <div class="content overflow-hidden">
+                    <div class="row">
+                        <div class="col-md-6 col-xl-3 invisible" data-toggle="appear" data-offset="50" data-class="animated fadeInUp">
+                            <!-- Developer Plan -->
+                            <a class="block block-link-shadow text-center" href="javascript:void(0)">
+                                <div class="block-header">
+                                    <h3 class="block-title">Startup</h3>
+                                </div>
+                                <div class="block-content bg-body-light">
+                                    <div class="py-2">
+                                        <p class="h1 font-w700 mb-2">$20</p>
+                                        <p class="h6 text-muted">per month</p>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    <div class="font-size-sm py-2">
+                                        <p>
+                                            <strong>50</strong> Transactions
+                                        </p>
+                                        <p>
+                                            <strong>1</strong> Employee
+                                        </p>
+                                        <p>
+                                            <strong>Phone</strong> Support
+                                        </p>
+                                        <p>
+                                            <strong>Email</strong> Support
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="block-content block-content-full bg-body-light">
+                                    <span class="btn btn-secondary px-4">Sign Up</span>
+                                </div>
+                            </a>
+                            <!-- END Developer Plan -->
+                        </div>
+                        <div class="col-md-6 col-xl-3 invisible" data-toggle="appear" data-offset="50" data-timeout="200" data-class="animated fadeInUp">
+                            <!-- Startup Plan -->
+                            <a class="block block-link-shadow text-center" href="javascript:void(0)">
+                                <div class="block-header">
+                                    <h3 class="block-title">Basic</h3>
+                                </div>
+                                <div class="block-content bg-body-light">
+                                    <div class="py-2">
+                                        <p class="h1 font-w700 mb-2">$50</p>
+                                        <p class="h6 text-muted">per month</p>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    <div class="font-size-sm py-2">
+                                        <p>
+                                            <strong>150</strong> Transactions
+                                        </p>
+                                        <p>
+                                            <strong>3</strong> Employees
+                                        </p>
+                                        <p>
+                                            <strong>Phone</strong> Support
+                                        </p>
+                                        <p>
+                                            <strong>Email</strong> Support
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="block-content block-content-full bg-body-light">
+                                    <span class="btn btn-secondary px-4">Sign Up</span>
+                                </div>
+                            </a>
+                            <!-- END Startup Plan -->
+                        </div>
+                        <div class="col-md-6 col-xl-3 invisible" data-toggle="appear" data-offset="50" data-timeout="400" data-class="animated fadeInUp">
+                            <!-- Business Plan -->
+                            <a class="block block-link-shadow block-themed block-fx-shadow text-center" href="javascript:void(0)">
+                                <div class="block-header">
+                                    <h3 class="block-title">
+                                        <i class="fa fa-thumbs-up mr-1"></i> Business
+                                    </h3>
+                                </div>
+                                <div class="block-content bg-body-light">
+                                    <div class="py-2">
+                                        <p class="h1 font-w700 mb-2">$75</p>
+                                        <p class="h6 text-muted">per month</p>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    <div class="font-size-sm py-2">
+                                        <p>
+                                            <strong>Unlimited</strong> Transactions
+                                        </p>
+                                        <p>
+                                            <strong>5</strong> Employees
+                                        </p>
+                                        <p>
+                                            <strong>Full</strong> Support
+                                        </p>
+                                        <p>
+                                            <strong>Email</strong> Service
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="block-content block-content-full bg-body-light">
+                                    <span class="btn btn-primary px-4">Sign Up</span>
+                                </div>
+                            </a>
+                            <!-- END Business Plan -->
+                        </div>
+                        <div class="col-md-6 col-xl-3 invisible" data-toggle="appear" data-offset="50" data-timeout="600" data-class="animated fadeInUp">
+                            <!-- VIP Plan -->
+                            <a class="block block-link-shadow text-center" href="javascript:void(0)">
+                                <div class="block-header">
+                                    <h3 class="block-title">Pro</h3>
+                                </div>
+                                <div class="block-content bg-body-light">
+                                    <div class="py-2">
+                                        <p class="h1 font-w700 mb-2">$200</p>
+                                        <p class="h6 text-muted">per month</p>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    <div class="font-size-sm py-2">
+                                        <p>
+                                            <strong>Unlimited</strong> Transactions
+                                        </p>
+                                        <p>
+                                            <strong>20</strong> Employees
+                                        </p>
+                                        <p>
+                                            <strong>Full</strong> Support
+                                        </p>
+                                        <p>
+                                            <strong>Email</strong> Service
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="block-content block-content-full bg-body-light">
+                                    <span class="btn btn-secondary px-4">Sign Up</span>
+                                </div>
+                            </a>
+                            <!-- END VIP Plan -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Remastered -->
+
+    <!-- Reviews -->
+    <div id="one-reviews" class="bg-image" style="background-image: url({% static 'media/photos/photo36@2x.jpg' %});">
+        <div class="bg-black-75">
+            <div class="content content-full">
+                <div class="py-5">
+                    <h2 class="h1 text-white mb-2 text-center">
+                        Customer Reviews
+                    </h2>
+                    <h3 class="font-w400 text-white-50 mb-5 text-center">
+                        Check out what our customers have written about Switch.
+                    </h3>
+                    <div class="row items-push-2x">
+                        <div class="col-md-4 invisible" data-toggle="appear">
+                            <div class="text-warning my-3">
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                            </div>
+                            <div class="text-white-50 mb-2">A combination of flexibility and ease of use. The design is beautiful, but I really value the ease in which I was able to integrate this into my development workflow and platform.</div>
+                            <div class="font-size-sm text-white-75">For Other by <em>appeality</em></div>
+                        </div>
+                        <div class="col-md-4 invisible" data-toggle="appear" data-timeout="150">
+                            <div class="text-warning my-3">
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                            </div>
+                            <div class="text-white-50 mb-2">While reading the docs i can feel that you literally gave your heart to create this project. It is a high quality piece of work, thanks for sharing it!</div>
+                            <div class="font-size-sm text-white-75">For Code Quality by <em>msagi</em></div>
+                        </div>
+                        <div class="col-md-4 invisible" data-toggle="appear" data-timeout="300">
+                            <div class="text-warning my-3">
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star"></i>
+                            </div>
+                            <div class="text-white-50 mb-2">This is my first purchase on Themeforest and I am delighted. Everything from the design to the code is beautifully crafted and the customer support is great also. Congratulations pixelcave.</div>
+                            <div class="font-size-sm text-white-75">For Customizability by <em>CaravelaThemes</em></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Reviews -->
+
+    <!-- Call To Action -->
+    <div id="one-call-to-action" class="bg-white">
+        <div class="content content-full">
+            <div class="bg-white">
+                <div class="content">
+                    <div class="row items-push justify-content-center">
+                        <div class="col-md-10 col-xl-5">
+                            <form action="be_pages_generic_contact.html" method="POST" onsubmit="return false;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="frontend-contact-firstname">Firstname</label>
+                                            <input type="text" class="form-control" id="frontend-contact-firstname" name="frontend-contact-firstname" placeholder="Enter your firstname..">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="frontend-contact-lastname">Lastname</label>
+                                            <input type="text" class="form-control" id="frontend-contact-lastname" name="frontend-contact-lastname" placeholder="Enter your lastname..">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="frontend-contact-email">Email</label>
+                                    <input type="email" class="form-control" id="frontend-contact-email" name="frontend-contact-email" placeholder="Enter your email..">
+                                </div>
+                                <div class="form-group">
+                                    <label for="frontend-contact-support">Support</label>
+                                    <input type="email" class="form-control" id="frontend-contact-email" name="frontend-contact-email" placeholder="Enter your subject">
+                                </div>
+                                <div class="form-group">
+                                    <label for="frontend-contact-msg">Textarea</label>
+                                    <textarea class="form-control" id="frontend-contact-msg" name="frontend-contact-msg" rows="7" placeholder="Enter your message.."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-paper-plane mr-1"></i> Send Message
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END Page Content -->
+        </div>
+    </div>
+    <!-- END Call To Action -->
+
+    <!-- Footer -->
+    <footer id="page-footer" class="bg-white">
+    <div class="content py-3">
+        <div class="row font-size-sm">
+            <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
+                Created by <a class="font-w600" href="" target="_blank">Peterson and Jerry Mauruice</a>
+            </div>
+            <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
+                <a class="font-w600" href="{% url 'home' %}" target="_blank">Switch</a> &copy; <span data-toggle="year-copy"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+    <!-- END Footer -->
+</main>
+<!-- END Main Container -->
+{% endblock %}

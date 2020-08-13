@@ -1,0 +1,66 @@
+{% extends "employee/base.html" %} 
+{% load static %} 
+{% block title %} Registers {% endblock %} 
+
+{% block  header %}
+    {% include "header/header.html" %}
+{% endblock %}
+{% block content %}
+<!-- Main Container -->
+<main id="main-container">
+    <!-- Hero -->
+    <div class="bg-body-light">
+        <div class="content content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h3 my-2">
+                    {{company.name}} <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">{{company.about}}</small>
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item">
+                            <a class="link-fx" href="{% url 'emp-dashboard'%}">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">Register</li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx" href="{% url 'emp-schedule'%}">List</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- END Hero -->
+
+    <!-- Page Content -->
+    <div class="content">
+        <!-- Simple Ribbon -->
+        <h2 class="content-heading">List of Cash Registers</h2>
+        <div class="row">
+            {% for r in register %}
+            <div class="col-md-6 col-xl-3">
+                <!-- Default Position Primary -->
+                <div class="block">
+                    <div class="block-content block-content-full ribbon ribbon-info">
+                        <div class="ribbon-box">
+                            {{r.balance}} <img src="{{r.country.flag}}" height=10>
+                        </div>
+                        <div class="text-center py-4">
+                            <p>
+                                <img src="{% static 'media/images/cashregister.png'%}" height=80>
+                            </p>
+                            <h4 class="mb-0">{{r.identification}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Default Position Primary -->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- END Page Content -->
+</main>
+<!-- END Main Container -->
+{% endblock %}
+{% block footer %}
+    {% include "footer/footer.html" %}
+{% endblock %}

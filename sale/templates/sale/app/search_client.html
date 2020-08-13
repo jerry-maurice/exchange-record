@@ -1,0 +1,39 @@
+{% extends "employee/base.html" %} 
+{% load static %} 
+{% block title %} Exchange {% endblock %} 
+
+{% block  header %}
+    {% include "header/header.html" %}
+{% endblock %}
+{% block content %}
+<!-- Main Container -->
+<main id="main-container">
+    <!-- Page Content -->
+    <div class="hero">
+        <div class="hero-inner text-center">
+            <div class="bg-white">
+                <div class="content content-full overflow-hidden">
+                    <div class="py-4">
+                        <!--  Header -->
+                        <h1 class="display-1 text-city invisible" data-toggle="appear" data-class="animated flipInX"><i class="si si-user ml-1"></i></h1>
+                        <h2 class="h3 font-w300 text-muted invisible mb-5" data-toggle="appear" data-class="animated fadeInUp">Search Client  by entering their phone number</h2>
+                        <!-- END Header -->
+                        <!-- Form Inline - Default Style -->
+                        <form class="mb-4" action="{% url 'app-search-client'%}" method="POST" onsubmit="return true;">
+                            {% csrf_token %}
+                            <label class="sr-only" for="example-if-email">Phone</label>
+                            <input required type="tel" class="form-control mb-4 mr-sm-4 text-center" id="" name="phone" placeholder="Phone">
+                            <button type="submit" class="btn btn-danger">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Page Content -->
+</main>
+<!-- END Main Container -->
+{% endblock%}
+{% block footer %}
+    {% include "footer/footer.html" %}
+{% endblock %}

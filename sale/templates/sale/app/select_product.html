@@ -1,0 +1,74 @@
+{% extends "employee/base.html" %} 
+{% load static %} 
+{% block title %} Exchange {% endblock %} 
+
+{% block  header %}
+    {% include "header/header.html" %}
+{% endblock %}
+{% block content %}
+<!-- Main Container -->
+<main id="main-container">
+    <!-- Page Content -->
+    <div class="hero">
+        <div class="hero-inner text-center">
+            <div class="bg-white">
+                <div class="content content-full overflow-hidden">
+                    <div class="py-4">
+                        <!--  Header -->
+                        <h1 class="display-1 text-city invisible" data-toggle="appear" data-class="animated flipInX"><i class="si si-flag ml-1"></i></h1>
+                        <h2 class="h3 font-w300 text-muted invisible mb-5" data-toggle="appear" data-class="animated fadeInUp">Select  the selling and  buying  product</h2>
+                        <!-- END Header -->
+                        <!-- Form Inline - Default Style -->
+                        <form action="{% url 'app-order' order_id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="block">
+                                <div class="block-header block-header-default">
+                                    <h3 class="block-title"></h3>
+                                    <div class="block-options">
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    <div class="row justify-content-center py-sm-3 py-md-5">
+                                        <div class="col-sm-10 col-md-8">
+                                            <div class="form-group">
+                                                <label for="val-skill">Currency (From) <span class="text-danger"></span></label>
+                                                <select class="form-control" id="" name="from_country">
+                                                    <option value="">Please select</option>
+                                                    {% for c in from_country %}
+                                                    <option value="{{c.id}}">{{c.currency}} ({{c.name}})</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Price</label>
+                                                <input type="number" step='0.01' class="form-control form-control-alt" id="" name="selling_price" placeholder="Amount to be exchange">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="val-skill">Currency (To) <span class="text-danger"></span></label>
+                                                <select class="form-control" id="" name="to_country">
+                                                    <option value="">Please select</option>
+                                                    {% for c in to_country %}
+                                                    <option value="{{c.id}}">{{c.currency}} ({{c.name}})</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Page Content -->
+</main>
+<!-- END Main Container -->
+{% endblock%}
+{% block footer %}
+    {% include "footer/footer.html" %}
+{% endblock %}

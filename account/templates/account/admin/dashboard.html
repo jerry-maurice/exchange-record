@@ -1,0 +1,380 @@
+{% extends "employee/base.html" %} 
+{% load static %} 
+{% block title %} Dashboard {% endblock %} 
+
+{% block  header %}
+    {% include "account/header/header.html" %}
+{% endblock %}
+{% block content %}
+<!-- Main Container -->
+<main id="main-container">
+    <!-- Navigation -->
+    <div class="bg-white">
+        <div class="content py-3">
+            <!-- Toggle Main Navigation -->
+            <div class="d-lg-none">
+                <!-- Class Toggle, functionality initialized in Helpers.coreToggleClass() -->
+                <button type="button" class="btn btn-block btn-alt-secondary d-flex justify-content-between align-items-center" data-toggle="class-toggle" data-target="#main-navigation" data-class="d-none">
+                    Menu
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <!-- END Toggle Main Navigation -->
+
+            <!-- Main Navigation -->
+            <div id="main-navigation" class="d-none d-lg-block mt-2 mt-lg-0">
+                <ul class="nav-main nav-main-horizontal nav-main-hover">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link active" href="{% url 'account-dashboard' %}">
+                            <i class="nav-main-link-icon si si-compass"></i>
+                            <span class="nav-main-link-name">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link active" href="{% url 'account-employees' %}">
+                            <i class="nav-main-link-icon si si-user"></i>
+                            <span class="nav-main-link-name">Employee</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link active" href="{% url 'account-clients' %}">
+                            <i class="nav-main-link-icon si si-user"></i>
+                            <span class="nav-main-link-name">Client</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link active" href="{% url 'country-list' %}">
+                            <i class="nav-main-link-icon si si-flag"></i>
+                            <span class="nav-main-link-name">Country</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link active" href="{% url 'list-register' %}">
+                            <i class="nav-main-link-icon si si-cash"></i>
+                            <span class="nav-main-link-name">Registers</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link active" href="{% url 'support-page' %}">
+                            <i class="nav-main-link-icon si si-phone"></i>
+                            <span class="nav-main-link-name">Support</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-heading"></li>
+                    <li class="nav-main-heading">Admin</li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                            <i class="nav-main-link-icon si si-puzzle"></i>
+                            <span class="nav-main-link-name">Administrative Functions</span>
+                        </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{% url 'account-rates' %}">
+                                    <span class="nav-main-link-name">Rates</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="bd_simple_2.html">
+                                    <span class="nav-main-link-name">Simple 2</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="bd_image_1.html">
+                                    <span class="nav-main-link-name">Image 1</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="bd_image_2.html">
+                                    <span class="nav-main-link-name">Image 2</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="bd_video_1.html">
+                                    <span class="nav-main-link-name">Video 1</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="bd_video_2.html">
+                                    <span class="nav-main-link-name">Video 2</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                    <span class="nav-main-link-name">More Options</span>
+                                </a>
+                                <ul class="nav-main-submenu">
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="javascript:void(0)">
+                                            <span class="nav-main-link-name">Another Link</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="javascript:void(0)">
+                                            <span class="nav-main-link-name">Another Link</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="javascript:void(0)">
+                                            <span class="nav-main-link-name">Another Link</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- END Main Navigation -->
+        </div>
+    </div>
+    <!-- END Navigation -->
+    <!-- Page Content -->
+    <div class="content">
+        <!-- Stats -->
+        <div class="row">
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Employee</div>
+                        <div class="font-size-h2 font-w400 text-dark">{{employee_size}}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Client</div>
+                        <div class="font-size-h2 font-w400 text-dark">{{client_size}}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Transaction (today)</div>
+                        <div class="font-size-h2 font-w400 text-dark">{{daily_transaction_count}}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Avg Sale</div>
+                        <div class="font-size-h2 font-w400 text-dark">$21</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- END Stats -->
+
+        <!-- Dashboard Charts -->
+        <div class="row row-deck">
+            <div class="col-lg-6">
+                <div class="block block-rounded block-mode-loading-oneui">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Fund Available</h3>
+                        <div class="block-options">
+                        </div>
+                    </div>
+                    <div class="block-content p-0 text-center">
+                        <!-- Chart.js is initialized in js/pages/be_pages_dashboard.min.js which was auto compiled from _es6/pages/be_pages_dashboard.js) -->
+                        <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
+                        <div class="pt-3" style="height: 360px;"><canvas id="register_balance" class=""></canvas></div>
+                    </div>
+                    <div class="block-content">
+                        <div class="row items-push text-center py-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="block block-mode-loading-oneui">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Cash Registers </h3>
+                        <div class="block-options">
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full">
+                        <table class="table table-striped table-hover table-borderless table-vcenter font-size-sm mb-0">
+                            <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700" style="width: 80px;">ID</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 100px;">Name</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 100px;">Balance</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Country</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for r in registers%}
+                                <tr>
+                                    <td>
+                                        <span class="font-w600">#{{r.id}}</span>
+                                    </td>
+                                    <td class="d-none d-sm-table-cell text-center">
+                                        {{r.identification}}
+                                    </td>
+                                    <td class="d-none d-sm-table-cell text-center">
+                                        {{r.balance}}
+                                    </td>
+                                    <td class="font-w700 text-center">
+                                        <img class="img-avatar img-avatar32" src="{{r.country.flag }}" alt="">
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Dashboard Charts -->
+
+        <!-- Customers and Latest Orders -->
+        <div class="row row-deck">
+            <!-- Latest Customers -->
+            <div class="col-lg-6">
+                <div class="block block-mode-loading-oneui">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Latest Rate</h3>
+                        <div class="block-options">
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full">
+                        <table class="table table-striped table-hover table-borderless table-vcenter font-size-sm mb-0">
+                            <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700" style="width: 80px;">ID</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 100px;">Country (From)</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 100px;">Country (To)</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for r in rate%}
+                                <tr>
+                                    <td>
+                                        <span class="font-w600">#{{r.id}}</span>
+                                    </td>
+                                    <td class="d-none d-sm-table-cell text-center">
+                                        <img class="img-avatar img-avatar32" src="{{r.from_country.flag }}" alt="">
+                                    </td>
+                                    <td class="d-none d-sm-table-cell text-center">
+                                        <img class="img-avatar img-avatar32" src="{{r.to_country.flag }}" alt="">
+                                    </td>
+                                    <td class="font-w700 text-center">
+                                        {{r.price}}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- END Latest Customers -->
+
+            <!-- Latest Orders -->
+            <div class="col-lg-6">
+                <div class="block block-mode-loading-oneui">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Latest Orders</h3>
+                        <div class="block-options">
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full">
+                        <table class="table table-striped table-hover table-borderless table-vcenter font-size-sm mb-0">
+                            <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700">ID</th>
+                                    <th class="d-none d-sm-table-cell font-w700">Date</th>
+                                    <th class="font-w700">State</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-right" style="width: 120px;">Client</th>
+                                    <!--<th class="font-w700 text-center" style="width: 60px;"></th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for t in transaction %}
+                                <tr>
+                                    <td>
+                                        <span class="font-w600">#{{t.id}}</span>
+                                    </td>
+                                    <td class="d-none d-sm-table-cell">
+                                        <span class="font-size-sm text-muted">{{t.fulfillment}}</span>
+                                    </td>
+                                    <td>
+                                        {% if t.status.name == 'PENDING..' %}
+                                        <span class="font-w600 text-warning">{{t.status}}</span>
+                                        {% elif t.status.name == 'COMPLETED' %}
+                                        <span class="font-w600 text-success">{{t.status}}</span>
+                                        {% else %}
+                                        <span class="font-w600 text-danger">{{t.status}}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="d-none d-sm-table-cell text-right">
+                                        {{t.customer.first_name}} {{t.customer.last_name}}
+                                    </td>
+                                    <!--<td class="text-center">
+                                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Edit">
+                                            <i class="fa fa-fw fa-pencil-alt"></i>
+                                        </a>
+                                    </td>-->
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- END Latest Orders -->
+        </div>
+        <!-- END Customers and Latest Orders -->
+    </div>
+    <!-- END Page Content -->
+</main>
+<!-- END Main Container -->
+{% endblock %}
+{% block footer %}
+    {% include "footer/footer.html" %}
+{% endblock %}
+{%  block script %}
+<script>
+
+var ctx = document.getElementById('register_balance');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {{label|safe}},
+        datasets: [{
+            label: 'Amount of  money',
+            data: {{data}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+{% endblock %}

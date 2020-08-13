@@ -1,0 +1,119 @@
+{% extends "employee/base.html" %} 
+{% load static %} 
+{% block title %} Invoice {% endblock %} 
+
+{% block  header %}
+    {% include "header/header.html" %}
+{% endblock %}
+{% block content %}
+<!-- Main Container -->
+<main id="main-container">
+    <!-- Page Content -->
+    <div class="content content-boxed">
+        <!-- Invoice -->
+        <div class="block">
+            <div class="block-header">
+                <h3 class="block-title">#INV{{order.id}}</h3>
+                <div class="block-options">
+                    <!-- Print Page functionality is initialized in Helpers.print() -->
+                    <button type="button" class="btn-block-option" onclick="One.helpers('print');">
+                        <i class="si si-printer mr-1"></i> Print Invoice
+                    </button>
+                </div>
+            </div>
+            <div class="block-content">
+                <div class="p-sm-4 p-xl-7">
+                    <!-- Invoice Info -->
+                    <div class="row mb-4">
+                        <!-- Company Info -->
+                        <div class="col-6 font-size-sm">
+                            <p class="h3">{{company}}</p>
+                            <address>
+                                {{location.house_nummber}} {{location.address}}<br>
+                                {{location.city}}, {{location.state}}<br>
+                                {{location.zipcode}}<br>
+                                {{location.phone}}
+                            </address>
+                        </div>
+                        <!-- END Company Info -->
+
+                        <!-- Client Info -->
+                        <div class="col-6 text-right font-size-sm">
+                            <p class="h3">Client</p>
+                            <address>
+                                {{customer.first_name}} {{order.customer.last_name}}<br>
+                                {{customer.phone}}<br>
+                                {{customer.email}}<br>
+                            </address>
+                        </div>
+                        <!-- END Client Info -->
+                    </div>
+                    <!-- END Invoice Info -->
+
+                    <!-- Table -->
+                    <div class="table-responsive push">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 60px;"></th>
+                                    <th>Product</th>
+                                    <th class="text-center" style="width: 90px;">Qnt</th>
+                                    <th class="text-right" style="width: 120px;">Unit</th>
+                                    <th class="text-right" style="width: 120px;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td>
+                                        <p class="font-w600 mb-1">Exchange</p>
+                                        <div class="text-muted">From {{order.product.from_country.currency}} to {{order.product.to_country.currency}}</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-pill badge-primary">{{order.quantity}}</span>
+                                    </td>
+                                    <td class="text-right">{{order.product.price}}</td>
+                                    <td class="text-right">{{order.total_price}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="font-w600 text-right">Subtotal</td>
+                                    <td class="text-right">{{order.quantity}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="font-w600 text-right">Fee ({{order.fee.amount}}%)</td>
+                                    <td class="text-right">{{order.fee_amount}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="font-w700 text-uppercase text-right bg-body-light">Total Due</td>
+                                    <td class="font-w700 text-right bg-body-light">{{order.exchange_total_due}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="font-w500 text-uppercase text-right bg-body-light">Amount Paid</td>
+                                    <td class="font-w700 text-right bg-body-light">{{payment.amount}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="font-w500 text-uppercase text-right bg-body-light">Total Change</td>
+                                    <td class="font-w700 text-right bg-body-light">{{change}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- END Table -->
+
+                    <!-- Footer -->
+                    <p class="font-size-sm text-muted text-center py-3 my-3 border-top">
+                        Thank you very much for doing business with us. We look forward to working with you again!
+                    </p>
+                    <!-- END Footer -->
+                </div>
+            </div>
+        </div>
+        <!-- END Invoice -->
+    </div>
+    <!-- END Page Content -->
+</main>
+<!-- END Main Container -->
+{% endblock%}
+{% block footer %}
+    {% include "footer/footer.html" %}
+{% endblock %}

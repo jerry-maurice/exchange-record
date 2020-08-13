@@ -1,0 +1,130 @@
+{% extends "employee/base.html" %} 
+{% load static %} 
+{% block title %} Add Client {% endblock %} 
+{% block css %}
+<!-- Page JS Plugins CSS -->
+<link rel="stylesheet" href="{% static 'js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css' %}">
+<link rel="stylesheet" href="{% static 'js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'js/plugins/select2/css/select2.min.css' %}">
+<link rel="stylesheet" href="{% static 'js/plugins/ion-rangeslider/css/ion.rangeSlider.css' %}">
+<link rel="stylesheet" href="{% static 'js/plugins/dropzone/dist/min/dropzone.min.css' %}">
+<link rel="stylesheet" href="{% static 'js/plugins/flatpickr/flatpickr.min.css' %}">
+{% endblock %}
+{% block  header %}
+    {% include "header/header.html" %}
+{% endblock %}
+{% block content %}
+<!-- Main Container -->
+<main id="main-container">
+    <!-- Hero -->
+    <div class="bg-body-light">
+        <div class="content content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h3 my-2">
+                    {{company.name}} <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">{{company.about}}</small>
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item">
+                            <a class="link-fx" href="{% url 'emp-dashboard'%}">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">Client</li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            Add
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- END Hero -->
+
+    <!-- Page Content -->
+    <div class="content">
+        <!-- jQuery Validation (.js-validation class is initialized in js/pages/be_forms_validation.min.js which was auto compiled from _es6/pages/be_forms_validation.js) -->
+        <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
+        <form class="js-validation" action="{% url 'add-client' %}" method="POST">
+            {% csrf_token %}
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="block-title">Add a new Customer</h3>
+                </div>
+                <div class="block-content block-content-full">
+                    <!-- Regular -->
+                    <h2 class="content-heading border-bottom mb-4 pb-2">Client Info</h2>
+                    <div class="row items-push">
+                        <div class="col-lg-4">
+                            <p class="font-size-sm text-muted">
+                                Detail information about a client
+                            </p>
+                        </div>
+                        <div class="col-lg-8 col-xl-5">
+                            <div class="form-group">
+                                <label for="val-username">Identification <span class="text-danger"></span></label>
+                                <input type="text" class="form-control" id="identification" name="identification" placeholder="Enter a NIF, CIN, or PASSPORT">
+                            </div>
+                            <div class="form-group">
+                                <label for="val-username">First Name <span class="text-danger">*</span></label>
+                                <input required type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter a first name..">
+                            </div>
+                            <div class="form-group">
+                                <label for="val-username">Last Name <span class="text-danger">*</span></label>
+                                <input required type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter a last name..">
+                            </div>
+                            <div class="form-group">
+                                <label for="val-email">Email <span class="text-danger"></span></label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter a valid email..">
+                            </div>
+                            <div class="form-group">
+                                <label for="val-skill">Gender <span class="text-danger"></span></label>
+                                <select class="form-control" id="gender" name="gender">
+                                    <option value="">Please select</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="val-password">Date of Birth <span class="text-danger"></span></label>
+                                <input type="text" class="js-flatpickr form-control bg-white" id="dob" name="dob" placeholder="Y-m-d">
+                            </div>
+                            <div class="form-group">
+                                <label for="val-confirm-password">Phone <span class="text-danger">*</span></label>
+                                <input required type="tel" class="form-control" id="phone" name="phone" placeholder="Enter a valid  phone number">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Regular -->
+
+                    <!-- Submit -->
+                    <div class="row items-push">
+                        <div class="col-lg-7 offset-lg-4">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                    <!-- END Submit -->
+                </div>
+            </div>
+        </form>
+        <!-- jQuery Validation -->
+    </div>
+    <!-- END Page Content -->
+</main>
+<!-- END Main Container -->
+{% endblock %}
+{% block footer %}
+    {% include "footer/footer.html" %}
+{% endblock %}
+{%block script %}
+<!-- Page JS Plugins -->
+<script src="{% static 'js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js'%}"></script>
+<script src="{% static 'js/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'%}"></script>
+<script src="{% static 'js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js'%}"></script>
+<script src="{% static 'js/plugins/select2/js/select2.full.min.js'%}"></script>
+<script src="{% static 'js/plugins/jquery.maskedinput/jquery.maskedinput.min.js'%}"></script>
+<script src="{% static 'js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js'%}"></script>
+<script src="{% static 'js/plugins/dropzone/dropzone.min.js'%}"></script>
+<script src="{% static 'js/plugins/flatpickr/flatpickr.min.js'%}"></script>
+
+<!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Inputs + Ion Range Slider plugins) -->
+<script>jQuery(function(){ One.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider']); });</script>
+{%endblock%}
