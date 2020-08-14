@@ -3,7 +3,7 @@
 {% block title %} Country {% endblock %} 
 
 {% block  header %}
-    {% include "header/header.html" %}
+    {% include "account/header/header.html" %}
 {% endblock %}
 {% block content %}
 <!-- Main Container -->
@@ -70,7 +70,28 @@
                 </table>
             </div>
         </div>
-        <!-- END Dynamic Table Full -->
+        <!-- END Dynamic Table Full --><!--Adding rates-->
+        <div class="block">
+            <div class="block-header">
+                <h3 class="block-title">Add new Country <small></small></h3>
+            </div>
+            <div class="block-content block-content-full">
+                <!-- Search Form -->
+                <form id="search_country">
+                    <div class="form-group row justify-content-center">
+                        <div class="col-sm-6 col-xl-4">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <input required type="text" id="country" class="form-control" type="text" placeholder="Enter the country name">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <!-- END Page Content -->
 </main>
@@ -91,5 +112,74 @@
 
 <!-- Page JS Code -->
 <script src="{% static 'js/pages/be_tables_datatables.min.js'%}"></script>
+<script>
+    //find country
+    let SEARCH_COUNTRY = 'https://restcountries.eu/rest/v2/name/'
+    const COUNTRY_SEARCH_FORM =  document.getElementById('search_country')
+    COUNTRY_SEARCH_FORM.addEventListener('submit', function(e){
+        e.preventDefault();
+        name = document.getElementById('country').value;
+        SEARCH_COUNTRY = SEARCH_COUNTRY+name;
+        getInputedCountry(SEARCH_COUNTRY);
+    })
 
+    const getInputedCountry = async (SEARCH_COUNTRY)=>{
+        const res = await fetch(SEARCH_COUNTRY);
+        try{
+            const data = await res.json();
+            //console.log(data);
+            //country_info(data);
+            if(res.status == 200){
+                let country = {
+                    'name':data[0].name,
+                    'alpha2Code': data[0].alpha2Code,
+                    'alpha3Code':data[0].alpha3Code,
+                    'currency': data[0].currencies[0].name,
+                    'flag': data[0].flag,
+                    'language':data[0].languages[0].nativeName,
+                }
+                submit_country_info("{% url 'country-add'%}", country);
+                location.reload();
+            }
+            else{
+                alert("Country not found");
+            }
+        }catch(error){
+            console.log("error", error);
+        }
+    }//submit country info
+    const submit_country_info = async (url='', data = {})=>{
+        const response = await fetch(url, {
+            method: 'POST',
+            credentials:'same-origin',
+            headers: {
+                'X-CSRFToken':getCookie("csrftoken"),
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        try{
+            const newData = await response.json()
+            //window.location.href = "{% url 'account-dashboard' %}";
+            alert(" new country added");
+        }catch(error){
+            console.log("error", error);
+        }
+    }
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
 {% endblock %}

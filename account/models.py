@@ -35,8 +35,8 @@ class Account_Plan(models.Model):
     '''
     Chosen plan
     '''
-    plan = models.OneToOneField(Plan, on_delete=models.CASCADE, related_name='account_plan')
-    account = models.OneToOneField(Account, on_delete=models.CASCADE, related_name='account_holder')
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, related_name='account_plan')
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='account_holder')
     started = models.DateTimeField(auto_now_add=True)
     trial = models.BooleanField(default=False)
 
