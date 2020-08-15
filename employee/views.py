@@ -4,6 +4,10 @@ from django.contrib.auth.decorators import login_required
 from  employee.models import Employee, Schedule
 from sale.models import OrderDetail, Order, Product
 from register.models import RegisterAssigned, Register_Log
+from account.models import Account
+from company.models import Company
+
+from account.views import account_emp_transfer
 
 
 import logging
@@ -97,6 +101,39 @@ def schedule(request):
             'company':company,
         }
         return  render(request, 'employee/schedule/schedule.html',context)
+
+
+@login_required
+def add_schedule(request, emp_id):
+    user = request.user
+    if Account.objects.filter(user=user).exists():
+        account = get_object_or_404(Account, user=user)
+        company = get_object_or_404(Company, account=account)
+        employee = get_object_or_404(Employee, id=emp_id)
+        schedule = Schedule.objects.filter(employee=employee)
+        if request.method == 'GET':
+            context = {
+                'schedule':schedule,
+                'company':company,
+                'employee':employee,
+            }
+            return render(request, 'employee/schedule/addSchedule.html', context)
+        if request.method == 'POST':
+            weekday = request.POST['weekday']
+            start_time = request.POST['start_time']
+            end_time = request.POST['end_time']
+            task = request.POST['task']
+            location = employee.location
+            company = company
+            schedule = Schedule(employee=employee, weekday=weekday, start_time=start_time, end_time=end_time, task=task, location=location)
+            schedule.save()
+            return redirect(account_emp_transfer, emp_id)
+    else:
+        logout(request)
+        context = {
+            'message_authentication':'You are not allowed to access this page'
+        }
+        return render(request, 'authentication/registration/login.html',context)
         
 
 

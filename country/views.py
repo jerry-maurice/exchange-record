@@ -71,20 +71,6 @@ def addCountry(request):
                 }
                 return  render(request,  'country/add/countryadd.html',context)
             return redirect(addCountry)
-            '''try:
-                json_data = json.loads(request.body)
-                name = json_data['name']
-                alpha2Code = json_data['alpha2Code']
-                alpha3Code = json_data['alpha3Code']
-                currency = json_data['currency']
-                flag = json_data['flag']
-                language = json_data['language']
-                country = Country(name=name, alpha2Code=alpha2Code, alpha3Code=alpha3Code, 
-                currency=currency, flag=flag, language=language, company=company)
-                country.save()
-            except json.decoder.JSONDecodeError:
-                logger.warning("String could not be converted to JSON")
-            return redirect(addCountry)'''
     else:
         logout(request)
         context = {

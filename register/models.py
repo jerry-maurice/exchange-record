@@ -62,6 +62,7 @@ class RegisterAssigned(models.Model):
     date =  models.DateField(null=False)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='employee_register_assigned')
     register = models.ForeignKey(Register, on_delete=models.CASCADE, related_name='register_assigned_emp')
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company_assigned_emp', null=True)
 
     def __str__(self):
         return f'{self.employee}. -> {self.register.identification}. {self.register.balance}'

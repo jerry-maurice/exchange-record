@@ -1,6 +1,6 @@
 {% extends "employee/base.html" %} 
 {% load static %} 
-{% block title %} Employee {% endblock %} 
+{% block title %} Registers {% endblock %} 
 
 {% block  header %}
     {% include "account/header/header.html" %}
@@ -18,11 +18,11 @@
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">
-                            <a class="link-fx" href="{% url 'account-dashboard'%}">Dashboard</a>
+                            <a class="link-fx" href="{% url 'emp-dashboard'%}">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item">Employee</li>
+                        <li class="breadcrumb-item">Register</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            Transaction
+                            <a class="link-fx" href="{% url 'clients'%}">Assigned</a>
                         </li>
                     </ol>
                 </nav>
@@ -36,55 +36,36 @@
         <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header">
-                <h3 class="block-title">{{employee.user.first_name}} {{employee.user.last_name}} <small><a href="{% url 'emp-schedule-add' employee.id %}">add schedule</a></small> / <small><a href="{% url 'add-client' %}">assign cash register</a></small></h3>
+                <h3 class="block-title">Employee and Register <small></small></h3>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
                 <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
                         <tr>
-                            <th class="text-center" style="width: 80px;">ID</th>
-                            <th style="width: 10%;">Status</th>
-                            <th style="">Placement</th>
-                            <th class="d-none d-sm-table-cell">Fulfillment</th>
-                            <th class="d-none d-sm-table-cell">Employee</th>
-                            <th class="d-none d-sm-table-cell">Client</th>
-                            <th style="width: 25%;">Location (office)</th>
+                            <th class="text-center" style="width: 80px;">Id</th>
+                            <th style="width: 20%;">Employee</th>
+                            <th>Register</th>
+                            <th class="d-none d-sm-table-cell" style="width: 20%;">Location</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for c in transactions %}
+                        {% for r in register %}
                         <tr>
-                            <td class="text-center font-size-sm">
-                                <a href="{% url 'account-transfer' c.id %}">{{c.order.id}}</a>
-                            </td>
-                            <td class="font-w600 font-size-sm">
-                                {% if c.order.status.name == 'PENDING..' %}
-                                <span class="font-w600 text-warning">{{c.order.status.name}}</span>
-                                {% elif c.order.status.name == 'COMPLETED' %}
-                                <span class="font-w600 text-success">{{c.order.status.name}}</span>
-                                {% else %}
-                                <span class="font-w600 text-danger">{{c.order.status.name}}</span>
-                                {% endif %}
-                            </td>
-                            <td class="text-center font-size-sm">{{c.order.placement}}</td>
-                            <td class="text-center font-size-sm">{{c.order.fulfillment}}</td>
+                            <td class="text-center font-size-sm">{{r.id}}</td>
+                            <td class="text-center font-size-sm">{{r.employee}}</td>
+                            <td class="text-center font-size-sm">{{r.register.identification}}</td>
                             <td class="d-none d-sm-table-cell font-size-sm">
-                                <em class="text-muted">{{c.order.employee}}</em>
+                                {{r.employee.location}}
                             </td>
-                            <td class="d-none d-sm-table-cell font-size-sm">
-                                <em class="text-muted">{{c.order.customer}}</em>
-                            </td>
-                            <td>
-                                <em class="text-muted font-size-sm">{{c.order.location}}</em>
-                            </td>
+                            <td class="text-center font-size-sm">{{r.date}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
-        <!-- END Dynamic Table Full -->
     </div>
     <!-- END Page Content -->
 </main>

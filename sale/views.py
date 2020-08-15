@@ -121,6 +121,7 @@ def submit_order(request, order_id, detail_id):
         if detail.total_price > to_register.balance:
             c_status = Transaction_Status.objects.get(name="CANCELLED")
             order.status = c_status
+            order.comment = 'Cash register \' balance is low. Order has been cancelled. Please add  more fund to this cash register'
             order.save()
             context = {
                 'message':'Cash register \' balance is low. Order has been cancelled. Please add  more fund to this cash register'
