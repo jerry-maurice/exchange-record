@@ -49,8 +49,8 @@ def order_detail(request, order_id):
     location = employee.location
     order = get_object_or_404(Order, pk=order_id)
     if request.method == 'GET':
-        from_country = Country.objects.all()
-        to_country = Country.objects.all()
+        from_country = Country.objects.filter(company=company)
+        to_country = Country.objects.filter(company=company)
         context = {
             'from_country':from_country,
             'to_country':to_country,
