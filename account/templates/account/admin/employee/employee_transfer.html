@@ -36,7 +36,7 @@
         <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header">
-                <h3 class="block-title">{{employee.user.first_name}} {{employee.user.last_name}} <small></small></h3>
+                <h3 class="block-title">{{employee.user.first_name}} {{employee.user.last_name}} <small><a href="{% url 'add-client' %}">add schedule</a></small> / <small><a href="{% url 'add-client' %}">assign cash register</a></small></h3>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->

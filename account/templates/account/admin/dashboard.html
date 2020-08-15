@@ -49,9 +49,15 @@
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link active" href="{% url 'list-register' %}">
+                        <a class="nav-main-link active" href="{% url 'account-list-register' %}">
                             <i class="nav-main-link-icon si si-cash"></i>
                             <span class="nav-main-link-name">Registers</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link active" href="{% url 'account-list-register' %}">
+                            <i class="nav-main-link-icon si si-cash"></i>
+                            <span class="nav-main-link-name">Fund</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -74,51 +80,9 @@
                                 </a>
                             </li>
                             <li class="nav-main-item">
-                                <a class="nav-main-link" href="bd_simple_2.html">
-                                    <span class="nav-main-link-name">Simple 2</span>
+                                <a class="nav-main-link" href="{% url 'emp-assigned-register'%}">
+                                    <span class="nav-main-link-name">Assigned Registers</span>
                                 </a>
-                            </li>
-                            <li class="nav-main-item">
-                                <a class="nav-main-link" href="bd_image_1.html">
-                                    <span class="nav-main-link-name">Image 1</span>
-                                </a>
-                            </li>
-                            <li class="nav-main-item">
-                                <a class="nav-main-link" href="bd_image_2.html">
-                                    <span class="nav-main-link-name">Image 2</span>
-                                </a>
-                            </li>
-                            <li class="nav-main-item">
-                                <a class="nav-main-link" href="bd_video_1.html">
-                                    <span class="nav-main-link-name">Video 1</span>
-                                </a>
-                            </li>
-                            <li class="nav-main-item">
-                                <a class="nav-main-link" href="bd_video_2.html">
-                                    <span class="nav-main-link-name">Video 2</span>
-                                </a>
-                            </li>
-                            <li class="nav-main-item">
-                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                    <span class="nav-main-link-name">More Options</span>
-                                </a>
-                                <ul class="nav-main-submenu">
-                                    <li class="nav-main-item">
-                                        <a class="nav-main-link" href="javascript:void(0)">
-                                            <span class="nav-main-link-name">Another Link</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-main-item">
-                                        <a class="nav-main-link" href="javascript:void(0)">
-                                            <span class="nav-main-link-name">Another Link</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-main-item">
-                                        <a class="nav-main-link" href="javascript:void(0)">
-                                            <span class="nav-main-link-name">Another Link</span>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                     </li>
@@ -159,8 +123,8 @@
             <div class="col-6 col-md-3 col-lg-6 col-xl-3">
                 <a class="block block-rounded block-link-pop" href="javascript:void(0)">
                     <div class="block-content block-content-full">
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Avg Sale</div>
-                        <div class="font-size-h2 font-w400 text-dark">$21</div>
+                        <div class="font-size-sm font-w600 text-uppercase text-muted"># of Country</div>
+                        <div class="font-size-h2 font-w400 text-dark">{{country_size}}</div>
                     </div>
                 </a>
             </div>
@@ -286,9 +250,10 @@
                             <thead>
                                 <tr class="text-uppercase">
                                     <th class="font-w700">ID</th>
-                                    <th class="d-none d-sm-table-cell font-w700">Date</th>
+                                    <th class="d-none d-sm-table-cell font-w700">Fulfillment</th>
                                     <th class="font-w700">State</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-right" style="width: 120px;">Client</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-right" style="width: 120px;">Employee</th>
                                     <!--<th class="font-w700 text-center" style="width: 60px;"></th>-->
                                 </tr>
                             </thead>
@@ -312,6 +277,9 @@
                                     </td>
                                     <td class="d-none d-sm-table-cell text-right">
                                         {{t.customer.first_name}} {{t.customer.last_name}}
+                                    </td>
+                                    <td class="d-none d-sm-table-cell text-right">
+                                        {{t.employee}}
                                     </td>
                                     <!--<td class="text-center">
                                         <a href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Edit">

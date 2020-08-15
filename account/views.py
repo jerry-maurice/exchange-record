@@ -30,10 +30,12 @@ def account_dashboard(request):
             employees = Employee.objects.filter(company=company)
             clients = Client.objects.filter(company=company)
             today = date.today()
-            transaction = Order.objects.filter(location__company=company, placement__year=today.year, placement__month=today.month, placement__day=today.day)
+            transaction = Order.objects.filter(location__company=company, placement__gte=today)
+            logger.info(today)
             registers = Register.objects.filter(company=company).order_by('balance')[:10]
             product = Product.objects.filter(is_active=True, location__company=company).order_by('-modified')[:10]
             transactions = Order.objects.all().order_by('-placement')[:10]
+            countries = Country.objects.filter(company=company)
             context ={
                 'employee_size':len(employees),
                 'employee':employees,
@@ -43,6 +45,8 @@ def account_dashboard(request):
                 'registers':registers,
                 'rate': product,
                 'transaction':transactions,
+                'countries':countries,
+                'country_size':len(countries)
             }
             return render(request,'account/admin/dashboard.html', context)
         else:
