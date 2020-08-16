@@ -34,7 +34,7 @@ def account_dashboard(request):
             logger.info(today)
             registers = Register.objects.filter(company=company).order_by('balance')[:10]
             product = Product.objects.filter(is_active=True, location__company=company).order_by('-modified')[:10]
-            transactions = Order.objects.all().order_by('-placement')[:10]
+            transactions = Order.objects.filter(company=company).order_by('-placement')[:10]
             countries = Country.objects.filter(company=company)
             context ={
                 'employee_size':len(employees),
