@@ -104,3 +104,53 @@ def registerEmpAssigned(request):
         }
         return render(request, 'authentication/registration/login.html',context)
     
+
+@login_required
+def assign_register(request, emp_id):
+    user = request.user
+    if Account.objects.filter(user=user).exists():
+        account = get_object_or_404(Account, user=user)
+        company = get_object_or_404(Company, account=account)
+        employee = get_object_or_404(Employee, id=emp_id)
+        assigned = RegisterAssigned.objects.filter(employee=employee, date=date.today())
+        register = Register.objects.filter(company=company)
+        if request.method == 'GET':
+            context = {
+                'assigned':assigned,
+                'company':company,
+                'employee':employee,
+                'today':date.today(),
+                'register':register
+            }
+            return render(request, 'register/add/assignRegister.html', context)
+        if request.method == 'POST':
+            cash_register = get_object_or_404(Register, id=request.POST['register']) 
+            assignRegister = RegisterAssigned(employee=employee, register=cash_register, date=date.today())
+            assignRegister.save()
+            return redirect(assign_register, employee.id)
+    else:
+        logout(request)
+        context = {
+            'message_authentication':'You are not allowed to access this page'
+        }
+        return render(request, 'authentication/registration/login.html',context)
+
+
+@login_required
+def remove_assign_register(request,emp_id, register_id ):
+    user = request.user
+    if Account.objects.filter(user=user).exists():
+        account = get_object_or_404(Account, user=user)
+        company = get_object_or_404(Company, account=account)
+        if request.method == 'GET':
+            employee = get_object_or_404(Employee, id=emp_id)
+            register = get_object_or_404(Register, id=register_id)
+            assigned = get_object_or_404(RegisterAssigned, employee=employee, register=register, date=date.today())
+            assigned.delete()
+            return redirect(assign_register, employee.id)
+    else:
+        logout(request)
+        context = {
+            'message_authentication':'You are not allowed to access this page'
+        }
+        return render(request, 'authentication/registration/login.html',context)

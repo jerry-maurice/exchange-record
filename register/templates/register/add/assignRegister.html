@@ -1,6 +1,6 @@
 {% extends "employee/base.html" %} 
 {% load static %} 
-{% block title %} Employee {% endblock %} 
+{% block title %} Assign Registers {% endblock %} 
 
 {% block  header %}
     {% include "account/header/header.html" %}
@@ -20,9 +20,9 @@
                         <li class="breadcrumb-item">
                             <a class="link-fx" href="{% url 'account-dashboard'%}">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item">Employee</li>
+                        <li class="breadcrumb-item">Register</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            Transaction
+                            <a class="link-fx">Assign</a>
                         </li>
                     </ol>
                 </nav>
@@ -36,48 +36,38 @@
         <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header">
-                <h3 class="block-title">{{employee.user.first_name}} {{employee.user.last_name}} <small><a href="{% url 'emp-schedule-add' employee.id %}">add schedule</a></small> / <small><a href="{% url 'assigned-register' employee.id %}">assign cash register</a></small></h3>
+                <h3 class="block-title">Cash Register <small></small></h3>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
                 <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
                         <tr>
-                            <th class="text-center" style="width: 80px;">ID</th>
-                            <th style="width: 10%;">Status</th>
-                            <th style="">Placement</th>
-                            <th class="d-none d-sm-table-cell">Fulfillment</th>
-                            <th class="d-none d-sm-table-cell">Employee</th>
-                            <th class="d-none d-sm-table-cell">Client</th>
-                            <th style="width: 25%;">Location (office)</th>
+                            <th class="text-center" style="width: 80px;">Id</th>
+                            <th style="width: 20%;">Name</th>
+                            <th>Balance</th>
+                            <th class="d-none d-sm-table-cell" style="width: 20%;">Country</th>
+                            <th>Created</th>
+                            <th class="d-none d-sm-table-cell" style="width: 20%;">Location</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for c in transactions %}
+                        {% for r in assigned %}
                         <tr>
-                            <td class="text-center font-size-sm">
-                                <a href="{% url 'account-transfer' c.id %}">{{c.order.id}}</a>
-                            </td>
-                            <td class="font-w600 font-size-sm">
-                                {% if c.order.status.name == 'PENDING..' %}
-                                <span class="font-w600 text-warning">{{c.order.status.name}}</span>
-                                {% elif c.order.status.name == 'COMPLETED' %}
-                                <span class="font-w600 text-success">{{c.order.status.name}}</span>
-                                {% else %}
-                                <span class="font-w600 text-danger">{{c.order.status.name}}</span>
-                                {% endif %}
-                            </td>
-                            <td class="text-center font-size-sm">{{c.order.placement}}</td>
-                            <td class="text-center font-size-sm">{{c.order.fulfillment}}</td>
+                            <td class="text-center font-size-sm">{{r.register.id}}</td>
+                            <td class="text-center font-size-sm">{{r.register.identification}}</td>
+                            <td class="text-center font-size-sm">{{r.register.balance}}</td>
                             <td class="d-none d-sm-table-cell font-size-sm">
-                                <em class="text-muted">{{c.order.employee}}</em>
+                                {{r.register.country}}
                             </td>
-                            <td class="d-none d-sm-table-cell font-size-sm">
-                                <em class="text-muted">{{c.order.customer}}</em>
+                            <td class="text-center font-size-sm">{{r.register.created}}</td>
+                            <td class="d-none d-sm-table-cell">
+                                <span class="badge badge-danger">{{r.register.location}}</span>
                             </td>
-                            <td>
-                                <em class="text-muted font-size-sm">{{c.order.location}}</em>
-                            </td>
+                            <td class="text-center font-size-sm">{{r.register.status}}</td>
+                            <td class="text-center font-size-sm"><a href="{% url 'remove_assign_register' employee.id r.register.id  %}">Remove</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -85,6 +75,33 @@
             </div>
         </div>
         <!-- END Dynamic Table Full -->
+        <div class="block">
+            <div class="block-header">
+                <h3 class="block-title">Assign new Cash Register today - {{today}} <small></small></h3>
+            </div>
+            <div class="block-content block-content-full">
+                <!-- Search Form -->
+                <form id="" action="{% url 'assigned-register' employee.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group row justify-content-center">
+                        <div class="col-sm-6 col-xl-4">
+                            <div class="form-group">
+                                <label for="val-skill">Register and their location <span class="text-danger"></span></label>
+                                <select class="form-control" id="" name="register">
+                                    <option value="">Please select</option>
+                                    {% for c in register %}
+                                    <option value="{{c.id}}">{{c.identification}} - {{c.location}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block">Assign</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <!-- END Page Content -->
 </main>
