@@ -6,6 +6,8 @@ from employee.models import Employee
 from  sale.models import Order, OrderDetail, Transaction_Status, Product, Fee, Payment_Method, Payment, Payment_Status
 from  country.models import Country
 from register.models import RegisterAssigned, Register_Log
+from account.models import Account
+from company.models import Company
 
 from client.views import add_client
 
@@ -180,3 +182,26 @@ def sale_summary(request):
         }
         return render(request,  'sale/invoice/sales.html',{'summary':summary})
 
+
+@login_required
+def sales_admin_transfer(request):
+    '''
+    show all employee transaction
+    '''
+    user = request.user
+    if request.method == 'GET':
+        if Account.objects.filter(user=user).exists():
+            account = get_object_or_404(Account, user=user)
+            company = get_object_or_404(Company, account=account)
+            transactions = OrderDetail.objects.filter(order__location__company=company)
+            context ={
+                'company':company,
+                'transactions':transactions
+            }
+            return render(request,'sale/admin/sales.html', context)
+        else:
+            logout(request)
+            context = {
+                'message_authentication':'You are not allowed to access this page'
+            }
+            return render(request, 'authentication/registration/login.html',context)
