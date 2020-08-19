@@ -35,7 +35,7 @@ def search_client(request):
         if client is None:
             return redirect(add_client)
         else:
-            status = Transaction_Status.objects.get(name="PENDING..")
+            status = Transaction_Status.objects.get(name="STARTING..")
             order = Order(customer=client, employee=employee, location=location, status=status)
             order.save()
             return redirect(order_detail, order_id=order.id)
@@ -60,13 +60,21 @@ def order_detail(request, order_id):
         }
         return render(request, 'sale/app/select_product.html',context)
     if request.method == 'POST':
-        order = get_object_or_404(Order, pk=order_id)
+        # order = get_object_or_404(Order, pk=order_id)
         from_country = get_object_or_404(Country, pk=request.POST['from_country'])
         to_country = get_object_or_404(Country, pk=request.POST['to_country'])
-        logger.info(to_country)
-        logger.info(from_country)
+        # logger.info(to_country)
+        # logger.info(from_country)
+        if Product.objects.filter(from_country=from_country, to_country=to_country, location=location).exists() == False:
+            context = {
+                'message':'Please, contact your manager. This product was not added'
+            }
+            return render(request, 'sale/message/message.html',context)
         product = get_object_or_404(Product, from_country=from_country, to_country=to_country, location=location)
         fee = Fee.objects.all().first()
+        status = Transaction_Status.objects.get(name="PENDING..")
+        order.status = status
+        order.save()
         detail = OrderDetail(product=product, quantity=request.POST['selling_price'], order=order,fee=fee)
         detail.save()
         return redirect(submit_order,order_id=order.id, detail_id=detail.id)
@@ -176,9 +184,12 @@ def sale_summary(request):
     company = employee.company
     if request.method == 'GET':
         summary = OrderDetail.objects.filter(order__employee=employee)
+        status = Transaction_Status.objects.get(name="STARTING..")
+        order = Order.objects.filter(employee=employee, status=status)
         context = {
             'summary':summary,
-            'company':company
+            'company':company,
+            'started_order':order,
         }
         return render(request,  'sale/invoice/sales.html',{'summary':summary})
 
@@ -194,9 +205,12 @@ def sales_admin_transfer(request):
             account = get_object_or_404(Account, user=user)
             company = get_object_or_404(Company, account=account)
             transactions = OrderDetail.objects.filter(order__location__company=company)
+            status = Transaction_Status.objects.get(name="STARTING..")
+            order = Order.objects.filter(location__company=company, status=status)
             context ={
                 'company':company,
-                'transactions':transactions
+                'transactions':transactions,
+                'started_order':order,
             }
             return render(request,'sale/admin/sales.html', context)
         else:
@@ -205,6 +219,19 @@ def sales_admin_transfer(request):
                 'message_authentication':'You are not allowed to access this page'
             }
             return render(request, 'authentication/registration/login.html',context)
+
+
+@login_required
+def delete_started_sales(request, order_id):
+    user = request.user
+    if request.method == 'GET':
+        if Account.objects.filter(user=user).exists():
+            account = get_object_or_404(Account, user=user)
+            company = get_object_or_404(Company, account=account)
+            order = get_object_or_404(Order, id=order_id)
+            order.delete()
+            return redirect(sales_admin_transfer)
+
 
 
 @login_required

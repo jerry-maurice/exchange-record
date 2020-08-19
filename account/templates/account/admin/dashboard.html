@@ -281,12 +281,14 @@
                                         <span class="font-w600 text-warning">{{t.status}}</span>
                                         {% elif t.status.name == 'COMPLETED' %}
                                         <span class="font-w600 text-success">{{t.status}}</span>
+                                        {% elif t.status.name == 'STARTING..' %}
+                                        <span class="font-w600 text-info">{{t.status}}</span>
                                         {% else %}
                                         <span class="font-w600 text-danger">{{t.status}}</span>
                                         {% endif %}
                                     </td>
                                     <td class="d-none d-sm-table-cell text-right">
-                                        {{t.customer.first_name}} {{t.customer.last_name}}
+                                        {{t.order.customer.first_name}} {{t.customer.last_name}}
                                     </td>
                                     <td class="d-none d-sm-table-cell text-right">
                                         {{t.employee}}

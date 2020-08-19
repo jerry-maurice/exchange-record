@@ -10,4 +10,5 @@ urlpatterns = [
     path('app/summary/', views.sale_summary, name='sale-summary' ),
     path('account/summary/', views.sales_admin_transfer, name='sales_admin_transfer' ),
     path('account/fee/', views.rate_admin, name='rate_admin' ),
+    path('account/sale/<int:order_id>/delete/', views.delete_started_sales, name='delete_started_sales' ),
 ]
