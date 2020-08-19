@@ -7,7 +7,7 @@ from  sale.models import Order, OrderDetail, Transaction_Status, Product, Fee, P
 from  country.models import Country
 from register.models import RegisterAssigned, Register_Log
 from account.models import Account
-from company.models import Company
+from company.models import Company, Location
 
 from client.views import add_client
 
@@ -205,3 +205,40 @@ def sales_admin_transfer(request):
                 'message_authentication':'You are not allowed to access this page'
             }
             return render(request, 'authentication/registration/login.html',context)
+
+
+@login_required
+def rate_admin(request):
+    '''
+    modify rate
+    '''
+    user = request.user
+    if Account.objects.filter(user=user).exists():
+        account = get_object_or_404(Account, user=user)
+        company = get_object_or_404(Company, account=account)
+        locations  = Location.objects.filter(company = company)
+        if request.method == 'GET':
+            fee =  Fee.objects.filter(company=company)
+            context = {
+                'fee':fee,
+                'company':company,
+                'locations':locations
+            }
+            return render(request, 'sale/admin/fee.html', context)
+        if request.method == 'POST':
+            location = get_object_or_404(Location, id=request.POST['location'])
+            if Fee.objects.filter(company=company, location=location).exists():
+                fee = get_object_or_404(Fee, company=company, location=location)
+                fee.amount = request.POST['amount']
+                fee.save()
+            else:
+                fee = Fee(amount=request.POST['amount'], location=location, company=company)
+                fee.save()
+            return redirect(rate_admin)
+
+    else:
+        logout(request)
+        context = {
+            'message_authentication':'You are not allowed to access this page'
+        }
+        return render(request, 'authentication/registration/login.html',context)

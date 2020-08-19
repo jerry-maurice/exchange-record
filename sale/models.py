@@ -15,6 +15,7 @@ class Fee(models.Model):
     amount =  models.FloatField(null=False)
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='fee_location' )
     is_active = models.BooleanField(default=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="fee_company", null=True)
 
     def __str__(self):
         return f'{self.amount}' 

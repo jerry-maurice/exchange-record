@@ -9,4 +9,5 @@ urlpatterns = [
     path('app/order/<int:order_id>/payment/<int:detail_id>', views.submit_order, name='app-payment' ),
     path('app/summary/', views.sale_summary, name='sale-summary' ),
     path('account/summary/', views.sales_admin_transfer, name='sales_admin_transfer' ),
+    path('account/fee/', views.rate_admin, name='rate_admin' ),
 ]
