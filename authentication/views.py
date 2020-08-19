@@ -66,6 +66,7 @@ def locked(request):
                 verify_account = Account.objects.filter(user=user).exists()
                 if verify_account == True:
                     # redirect to  account holder view
+                    return redirect(account_dashboard)
                     logger.info('account holder verified')
                 else:
                     # redirect to employee view
