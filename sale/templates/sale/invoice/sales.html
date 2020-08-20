@@ -1,11 +1,4 @@
-{% extends "employee/base.html" %} 
-{% load static %} 
-{% block title %} Sales {% endblock %} 
-
-{% block  header %}
-    {% include "header/header.html" %}
-{% endblock %}
-{% block content %}
+{% extends "employee/base.html" %} {% load static %} {% block title %} Sales {% endblock %} {% block header %} {% include "header/header.html" %} {% endblock %} {% block content %}
 <!-- Main Container -->
 <main id="main-container">
     <!-- Hero -->
@@ -36,7 +29,7 @@
         <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header">
-                <h3 class="block-title">Sales  Summary <small></small></h3>
+                <h3 class="block-title">Sales Summary <small></small></h3>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
@@ -69,15 +62,59 @@
             </div>
         </div>
         <!-- END Dynamic Table Full -->
+        <!-- Dynamic Table Full -->
+        <div class="block">
+            <div class="block-header">
+                <h3 class="block-title">Started Sales <small></small></h3>
+            </div>
+            <div class="block-content block-content-full">
+                <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+                <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 80px;">ID</th>
+                            <th style="width: 10%;">Status</th>
+                            <th>Placement</th>
+                            <th class="d-none d-sm-table-cell">Client</th>
+                            <th>Location (office)</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in started_order %}
+                        <tr>
+                            <td class="text-center font-size-sm">
+                                <a href="{% url 'account-transfer' c.id %}">{{c.id}}</a>
+                            </td>
+                            <td class="font-w600 font-size-sm">
+                                {% if c.status.name == 'PENDING..' %}
+                                <span class="font-w600 text-warning">{{c.status.name}}</span> {% elif c.status.name == 'COMPLETED' %}
+                                <span class="font-w600 text-success">{{c.status.name}}</span> {% elif c.status.name == 'STARTING..' %}
+                                <span class="font-w600 text-info">{{c.status.name}}</span> {% else %}
+                                <span class="font-w600 text-danger">{{c.status.name}}</span> {% endif %}
+                            </td>
+                            <td class="text-center font-size-sm">{{c.placement}}</td>
+                            <td class="d-none d-sm-table-cell font-size-sm">
+                                <em class="text-muted">{{c.customer}}</em>
+                            </td>
+                            <td>
+                                <em class="text-muted font-size-sm">{{c.location}}</em>
+                            </td>
+                            <td>
+                                <a href="{% url 'app-order' c.id %}">Continue</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END Dynamic Table Full -->
     </div>
     <!-- END Page Content -->
 </main>
 <!-- END Main Container -->
-{% endblock %}
-{% block footer %}
-    {% include "footer/footer.html" %}
-{% endblock %}
-{% block  script %}
+{% endblock %} {% block footer %} {% include "footer/footer.html" %} {% endblock %} {% block script %}
 <!-- Page JS Plugins -->
 <script src="{% static 'js/plugins/datatables/jquery.dataTables.min.js'%}"></script>
 <script src="{% static 'js/plugins/datatables/dataTables.bootstrap4.min.js'%}"></script>
