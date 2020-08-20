@@ -1,11 +1,4 @@
-{% extends "employee/base.html" %} 
-{% load static %} 
-{% block title %} Registers {% endblock %} 
-
-{% block  header %}
-    {% include "account/header/header.html" %}
-{% endblock %}
-{% block content %}
+{% extends "employee/base.html" %} {% load static %} {% block title %} Registers {% endblock %} {% block header %} {% include "account/header/header.html" %} {% endblock %} {% block content %}
 <!-- Main Container -->
 <main id="main-container">
     <!-- Hero -->
@@ -18,11 +11,11 @@
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">
-                            <a class="link-fx" href="{% url 'emp-dashboard'%}">Dashboard</a>
+                            <a class="link-fx" href="{% url 'account-dashboard'%}">Dashboard</a>
                         </li>
                         <li class="breadcrumb-item">Register</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="{% url 'clients'%}">Assigned</a>
+                            <a class="link-fx" href="">Assigned</a>
                         </li>
                     </ol>
                 </nav>
@@ -70,11 +63,7 @@
     <!-- END Page Content -->
 </main>
 <!-- END Main Container -->
-{% endblock %}
-{% block footer %}
-    {% include "footer/footer.html" %}
-{% endblock %}
-{% block  script %}
+{% endblock %} {% block footer %} {% include "footer/footer.html" %} {% endblock %} {% block script %}
 <!-- Page JS Plugins -->
 <script src="{% static 'js/plugins/datatables/jquery.dataTables.min.js'%}"></script>
 <script src="{% static 'js/plugins/datatables/dataTables.bootstrap4.min.js'%}"></script>
