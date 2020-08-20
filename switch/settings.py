@@ -10,8 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-from pathlib import Path
 import environ
+
+from pathlib import Path
+
+env = environ.Env(
+    DEBUG=(bool,  False)
+)
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -21,10 +27,10 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'p-4h%fznrm=(7@u!-ml46rkp7o@=y^r^t9-#(n2fa5)5or9-n8'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,10 +91,20 @@ WSGI_APPLICATION = 'switch.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('DB_NAME'),
+        'HOST':env('DATABASE_URL'),
+        'PORT':env('DB_PORT'),
+        'USER':env('DB_USERNAME'),
+        'PASSWORD':env('DB_PASSWORD'),
+    }
+}'''
+DATABASES = {
+    'default': {
+        'ENGINE': env('ENGINE'),
         'NAME': env('DB_NAME'),
         'HOST':env('DATABASE_URL'),
         'PORT':env('DB_PORT'),
