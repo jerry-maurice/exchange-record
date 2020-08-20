@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from client.models import Client
@@ -13,6 +14,7 @@ from client.views import add_client
 
 import logging
 from datetime import date,  datetime
+from django.utils import timezone
 
 # get an instance of a logger
 logger =  logging.getLogger(__name__)
@@ -63,8 +65,6 @@ def order_detail(request, order_id):
         # order = get_object_or_404(Order, pk=order_id)
         from_country = get_object_or_404(Country, pk=request.POST['from_country'])
         to_country = get_object_or_404(Country, pk=request.POST['to_country'])
-        # logger.info(to_country)
-        # logger.info(from_country)
         if Product.objects.filter(from_country=from_country, to_country=to_country, location=location).exists() == False:
             context = {
                 'message':'Please, contact your manager. This product was not added'
@@ -138,7 +138,7 @@ def submit_order(request, order_id, detail_id):
             }
             return render(request, 'sale/message/message.html',context)
         order.status = o_status
-        order.fulfillment = datetime.now()
+        order.fulfillment = timezone.now()
         order.save()
         change_due = float(detail.exchange_total_due) -  float(payment.amount)
         '''
@@ -191,7 +191,7 @@ def sale_summary(request):
             'company':company,
             'started_order':order,
         }
-        return render(request,  'sale/invoice/sales.html',{'summary':summary})
+        return render(request,  'sale/invoice/sales.html',context)
 
 
 @login_required

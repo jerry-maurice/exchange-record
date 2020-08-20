@@ -137,6 +137,12 @@ def rate_setup(request):
         if request.method == 'POST':
             from_country = get_object_or_404(Country, id=request.POST['from_country'])
             to_country = get_object_or_404(Country, id=request.POST['to_country'])
+            if from_country.id == to_country.id:
+                context = {
+                    "company":company,
+                    "message" : "Country (from) should not be the same  as Country(to)"
+                }
+                return render(request, 'account/admin/message/message.html', context)
             rate = request.POST['rate']
             locate = request.POST['location']
             location = get_object_or_404(Location, id=locate)
