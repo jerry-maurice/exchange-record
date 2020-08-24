@@ -6,7 +6,7 @@ class Country(models.Model):
     '''
     list of country available in the app
     '''
-    name = models.CharField(null=False, max_length=250, unique=True)
+    name = models.CharField(null=False, max_length=250)
     alpha2Code = models.CharField(null=False, max_length=2)
     alpha3Code = models.CharField(null=False, max_length=3)
     currency = models.CharField(null=False, max_length=100)
