@@ -1,4 +1,4 @@
-{% extends "employee/base.html" %} {% load static %} {% block title %} Schedule {% endblock %} {% block header %} {% include "account/header/header.html" %} {% endblock %} {% block content %}
+{% extends "employee/base.html" %} {% load static %} {% block title %} Overview {% endblock %} {% block header %} {% include "account/header/header.html" %} {% endblock %} {% block content %}
 <!-- Main Container -->
 <main id="main-container">
     <!-- Hero -->
@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item">
                             <a class="link-fx" href="{% url 'account-dashboard'%}">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item">Schedule</li>
+                        <li class="breadcrumb-item">Fund</li>
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx">List</a>
                         </li>
@@ -29,40 +29,39 @@
         <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header">
-                <h3 class="block-title">Schedule <small></small></h3>
+                <h3 class="block-title">Balance <small></small></h3>
             </div>
             <div class="block-content">
                 <p class="font-size-sm text-muted">
-                    This schedule includes the days and times that the employee is scheduled to be on the job
+                    This table shows the amount of money available in the company
                 </p>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-vcenter">
                         <thead>
                             <tr>
                                 <th class="text-center" style="width: 10%;">
-                                    Day
+                                    ID
                                 </th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th style="width: 30%;">Task</th>
-                                <th class="text-center" style="width: 15%;">Location</th>
+                                <th>Balance</th>
+                                <th>Currency</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for s in schedule %}
+                            {% for s in fund %}
                             <tr>
                                 <td class="text-center">
-                                    {{s.day_of_week}}
+                                    {{s.id}}
                                 </td>
                                 <td class="font-w600 font-size-sm">
-                                    {{s.start_time}}
+                                    {{s.funds}}
                                 </td>
                                 <td class="font-w600 font-size-sm">
-                                    {{s.end_time}}
+                                    {{s.country.currency}}
                                 </td>
-                                <td class="font-size-sm"><em class="text-muted">{{s.task}}</em></td>
-                                <td class="text-center">
-                                    <span class="badge badge-primary">{{s.location.house_number}} {{s.location.address}}</span>
+                                <td>
+                                    <a href="{% url 'fund-deposit' s.id %}">Deposit</a> |
+                                    <a href="{% url 'fund-log' s.id %}">Log</a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -79,34 +78,17 @@
             </div>
             <div class="block-content block-content-full">
                 <!-- Search Form -->
-                <form id="" action="{% url 'emp-schedule-add' employee.id %}" method="POST">
+                <form id="" action="{% url 'fund-overview' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group row justify-content-center">
                         <div class="col-sm-6 col-xl-4">
                             <div class="form-group">
                                 <label>Day of the Week</label>
-                                <select class="form-control" id="" name="weekday">
-                                    <option value="0">Sunday</option>
-                                    <option value="1">Monday</option>
-                                    <option value="2">Tuesday</option>
-                                    <option value="3">Wednesday</option>
-                                    <option value="4">Thursday</option>
-                                    <option value="5">Friday</option>
-                                    <option value="6">Saturday</option>
+                                <select class="form-control" id="" name="country">
+                                    {% for c in countries %}
+                                    <option value="{{c.id}}">{{c.name}}</option>
+                                    {% endfor %}
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Start</label>
-                                <input required type="time" name="start_time" class="form-control" type="text" placeholder="enter the start time - Military format">
-                            </div>
-                            <div class="form-group">
-                                <label>End</label>
-                                <input required type="time" name="end_time" class="form-control" type="text" placeholder="enter the end time - Military format">
-                            </div>
-                            <div class="form-group">
-                                <label>Task</label>
-                                <textarea name="task" class="form-control">
-                                </textarea>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">Add</button>

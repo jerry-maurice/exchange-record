@@ -1,0 +1,71 @@
+{% extends "employee/base.html" %} {% load static %} {% block title %} Deposit Fund {% endblock %} {% block header %} {% include "account/header/header.html" %} {% endblock %} {% block content %}
+<!-- Main Container -->
+<main id="main-container">
+    <!-- Hero -->
+    <div class="bg-body-light">
+        <div class="content content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h3 my-2">
+                    {{company.name}} <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">{{company.about}}</small>
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item">
+                            <a class="link-fx" href="{% url 'account-dashboard'%}">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">Fund</li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx">Deposit</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- END Hero -->
+
+    <!-- Page Content -->
+    <div class="content">
+        <!--Adding rates-->
+        <div class="block">
+            <div class="block-header">
+                <h3 class="block-title">Deposit <small></small></h3>
+            </div>
+            <div class="block-content block-content-full">
+                <!-- Search Form -->
+                <form id="" action="{% url 'fund-deposit' fund.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group row justify-content-center">
+                        <div class="col-sm-6 col-xl-4">
+                            <div class="form-group">
+                                <label>Amount to be deposited</label>
+                                <input required class="form-control" name="amount" step="0.01" type="number">
+                            </div>
+                            <div class="form-group">
+                                <label>Source</label>
+                                <select required class="form-control" id="" name="source">
+                                    <option value="Register">Register</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Comment</label>
+                                <textarea required class="form-control" name="comment"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END Page Content -->
+</main>
+<!-- END Main Container -->
+{% endblock %} {% block footer %} {% include "footer/footer.html" %} {% endblock %} {% block script %}
+
+<!-- Page JS Code -->
+<script src="{% static 'js/pages/be_tables_datatables.min.js'%}"></script>
+{% endblock %}

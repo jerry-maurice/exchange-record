@@ -1,11 +1,4 @@
-{% extends "employee/base.html" %} 
-{% load static %} 
-{% block title %} Dashboard {% endblock %} 
-
-{% block  header %}
-    {% include "account/header/header.html" %}
-{% endblock %}
-{% block content %}
+{% extends "employee/base.html" %} {% load static %} {% block title %} Dashboard {% endblock %} {% block header %} {% include "account/header/header.html" %} {% endblock %} {% block content %}
 <!-- Main Container -->
 <main id="main-container">
     <!-- Navigation -->
@@ -55,7 +48,7 @@
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link active" href="{% url 'account-list-register' %}">
+                        <a class="nav-main-link active" href="{% url 'fund-overview' %}">
                             <i class="nav-main-link-icon si si-cash"></i>
                             <span class="nav-main-link-name">Fund</span>
                         </a>
@@ -278,14 +271,10 @@
                                     </td>
                                     <td>
                                         {% if t.status.name == 'PENDING..' %}
-                                        <span class="font-w600 text-warning">{{t.status}}</span>
-                                        {% elif t.status.name == 'COMPLETED' %}
-                                        <span class="font-w600 text-success">{{t.status}}</span>
-                                        {% elif t.status.name == 'STARTING..' %}
-                                        <span class="font-w600 text-info">{{t.status}}</span>
-                                        {% else %}
-                                        <span class="font-w600 text-danger">{{t.status}}</span>
-                                        {% endif %}
+                                        <span class="font-w600 text-warning">{{t.status}}</span> {% elif t.status.name == 'COMPLETED' %}
+                                        <span class="font-w600 text-success">{{t.status}}</span> {% elif t.status.name == 'STARTING..' %}
+                                        <span class="font-w600 text-info">{{t.status}}</span> {% else %}
+                                        <span class="font-w600 text-danger">{{t.status}}</span> {% endif %}
                                     </td>
                                     <td class="d-none d-sm-table-cell text-right">
                                         {{t.order.customer.first_name}} {{t.customer.last_name}}
@@ -312,49 +301,52 @@
     <!-- END Page Content -->
 </main>
 <!-- END Main Container -->
-{% endblock %}
-{% block footer %}
-    {% include "footer/footer.html" %}
-{% endblock %}
-{%  block script %}
+{% endblock %} {% block footer %} {% include "footer/footer.html" %} {% endblock %} {% block script %}
 <script>
-
-var ctx = document.getElementById('register_balance');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: {{label|safe}},
-        datasets: [{
-            label: 'Amount of  money',
-            data: {{data}},
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
+    var ctx = document.getElementById('register_balance');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {
+                {
+                    label | safe
                 }
+            },
+            datasets: [{
+                label: 'Amount of  money',
+                data: {
+                    {
+                        data
+                    }
+                },
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
             }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
-    }
-});
+    });
 </script>
 {% endblock %}

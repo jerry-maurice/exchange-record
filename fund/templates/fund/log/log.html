@@ -1,0 +1,105 @@
+{% extends "employee/base.html" %} {% load static %} {% block title %} Log {% endblock %} {% block header %} {% include "account/header/header.html" %} {% endblock %} {% block content %}
+<!-- Main Container -->
+<main id="main-container">
+    <!-- Hero -->
+    <div class="bg-body-light">
+        <div class="content content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h3 my-2">
+                    {{company.name}} <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">{{company.about}}</small>
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item">
+                            <a class="link-fx" href="{% url 'account-dashboard'%}">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">Fund</li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx">List</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- END Hero -->
+
+    <!-- Page Content -->
+    <div class="content">
+        <!-- Dynamic Table Full -->
+        <div class="block">
+            <div class="block-header">
+                <h3 class="block-title">Balance <small></small></h3>
+            </div>
+            <div class="block-content">
+                <p class="font-size-sm text-muted">
+                    This table shows the amount of money available in the company
+                </p>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-vcenter">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 5%;">
+                                    ID
+                                </th>
+                                <th>Created</th>
+                                <th>Previous Balance</th>
+                                <th>Deposit</th>
+                                <th>Withdrew</th>
+                                <th>Balance</th>
+                                <th>Source</th>
+                                <th style="width: 30%;">Comment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in logs %}
+                            <tr>
+                                <td class="text-center">
+                                    {{s.id}}
+                                </td>
+                                <td class="font-w600 font-size-sm">
+                                    {{s.created}}
+                                </td>
+                                <td class="font-w600 font-size-sm">
+                                    {{s.previous_balance}}
+                                </td>
+                                <td class="font-w600 font-size-sm">
+                                    {{s.deposited}}
+                                </td>
+                                <td class="font-w600 font-size-sm">
+                                    {{s.withdrew}}
+                                </td>
+                                <td class="font-w600 font-size-sm">
+                                    {{s.actual_balance}}
+                                </td>
+                                <td class="font-w600 font-size-sm">
+                                    {{s.source}}
+                                </td>
+                                <td class="font-w600 font-size-sm">
+                                    {{s.comment}}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- END Dynamic Table Full -->
+    </div>
+    <!-- END Page Content -->
+</main>
+<!-- END Main Container -->
+{% endblock %} {% block footer %} {% include "footer/footer.html" %} {% endblock %} {% block script %}
+<!-- Page JS Plugins -->
+<script src="{% static 'js/plugins/datatables/jquery.dataTables.min.js'%}"></script>
+<script src="{% static 'js/plugins/datatables/dataTables.bootstrap4.min.js'%}"></script>
+<script src="{% static 'js/plugins/datatables/buttons/dataTables.buttons.min.js'%}"></script>
+<script src="{% static 'js/plugins/datatables/buttons/buttons.print.min.js'%}"></script>
+<script src="{% static 'js/plugins/datatables/buttons/buttons.html5.min.js'%}"></script>
+<script src="{% static 'js/plugins/datatables/buttons/buttons.flash.min.js'%}"></script>
+<script src="{% static 'js/plugins/datatables/buttons/buttons.colVis.min.js'%}"></script>
+
+<!-- Page JS Code -->
+<script src="{% static 'js/pages/be_tables_datatables.min.js'%}"></script>
+{% endblock %}

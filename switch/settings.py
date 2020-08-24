@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'sale.apps.SaleConfig',
     'support.apps.SupportConfig',
+    'fund.apps.FundConfig',
     'phone_field', 
 ]
 
@@ -91,17 +92,7 @@ WSGI_APPLICATION = 'switch.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DB_NAME'),
-        'HOST':env('DATABASE_URL'),
-        'PORT':env('DB_PORT'),
-        'USER':env('DB_USERNAME'),
-        'PASSWORD':env('DB_PASSWORD'),
-    }
-}'''
+
 DATABASES = {
     'default': {
         'ENGINE': env('ENGINE'),

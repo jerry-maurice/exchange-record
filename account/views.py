@@ -12,6 +12,7 @@ from country.models import Country
 
 import logging
 from datetime import date,  datetime
+from django.utils import timezone
 
 # get an instance of a logger
 logger =  logging.getLogger(__name__)
@@ -31,7 +32,6 @@ def account_dashboard(request):
             clients = Client.objects.filter(company=company)
             today = date.today()
             transaction = Order.objects.filter(location__company=company, placement__gte=today)
-            logger.info(today)
             registers = Register.objects.filter(company=company).order_by('balance')[:10]
             product = Product.objects.filter(is_active=True, location__company=company).order_by('-modified')[:10]
             transactions = Order.objects.filter(location__company=company).order_by('-placement')[:10]
