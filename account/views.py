@@ -9,6 +9,7 @@ from client.models import Client
 from sale.models import Order, Product, OrderDetail, Payment, Transaction_Status
 from register.models import Register
 from country.models import Country
+from fund.models import Fund
 
 import logging
 from datetime import date,  datetime
@@ -36,6 +37,14 @@ def account_dashboard(request):
             product = Product.objects.filter(is_active=True, location__company=company).order_by('-modified')[:10]
             transactions = Order.objects.filter(location__company=company).order_by('-placement')[:10]
             countries = Country.objects.filter(company=company)
+            funds = Fund.objects.filter(company=company)
+            data =  []
+            label =[]
+            for r in funds:
+                data.append(r.funds)
+                name = str(r.country.name)
+                label.append(name)
+
             context ={
                 'employee_size':len(employees),
                 'employee':employees,
@@ -46,7 +55,9 @@ def account_dashboard(request):
                 'rate': product,
                 'transaction':transactions,
                 'countries':countries,
-                'country_size':len(countries)
+                'country_size':len(countries),
+                'data':data,
+                'label':label,
             }
             return render(request,'account/admin/dashboard.html', context)
         else:

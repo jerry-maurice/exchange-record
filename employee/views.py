@@ -36,7 +36,6 @@ def dashboard(request):
             data.append(r.register.balance)
             name = str(r.register.country.name)
             label.append(name)
-        logger.info(label)
         context = {
             'transaction':transaction,
             'rate':product,

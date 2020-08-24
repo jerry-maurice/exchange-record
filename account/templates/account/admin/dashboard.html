@@ -146,7 +146,7 @@
                     <div class="block-content p-0 text-center">
                         <!-- Chart.js is initialized in js/pages/be_pages_dashboard.min.js which was auto compiled from _es6/pages/be_pages_dashboard.js) -->
                         <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
-                        <div class="pt-3" style="height: 360px;"><canvas id="register_balance" class=""></canvas></div>
+                        <div class="pt-3" style="height: 360px;"><canvas id="fund_balance" class=""></canvas></div>
                     </div>
                     <div class="block-content">
                         <div class="row items-push text-center py-3">
@@ -303,22 +303,14 @@
 <!-- END Main Container -->
 {% endblock %} {% block footer %} {% include "footer/footer.html" %} {% endblock %} {% block script %}
 <script>
-    var ctx = document.getElementById('register_balance');
+    var ctx = document.getElementById('fund_balance');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: {
-                {
-                    label | safe
-                }
-            },
+            labels: {{label | safe}},
             datasets: [{
-                label: 'Amount of  money',
-                data: {
-                    {
-                        data
-                    }
-                },
+                label: 'Balance',
+                data: {{data}},
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
