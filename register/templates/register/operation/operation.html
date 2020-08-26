@@ -1,4 +1,4 @@
-{% extends "employee/base.html" %} {% load static %} {% block title %} Deposit Fund {% endblock %} {% block header %} {% include "account/header/header.html" %} {% endblock %} {% block content %}
+{% extends "employee/base.html" %} {% load static %} {% block title %} Operation {% endblock %} {% block header %} {% include "account/header/header.html" %} {% endblock %} {% block content %}
 <!-- Main Container -->
 <main id="main-container">
     <!-- Hero -->
@@ -13,9 +13,9 @@
                         <li class="breadcrumb-item">
                             <a class="link-fx" href="{% url 'account-dashboard'%}">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item">Fund</li>
+                        <li class="breadcrumb-item">Register</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx">Deposit</a>
+                            <a class="link-fx">Operation</a>
                         </li>
                     </ol>
                 </nav>
@@ -29,31 +29,31 @@
         <!--Adding rates-->
         <div class="block">
             <div class="block-header">
-                <h3 class="block-title">Deposit <small></small></h3>
+                <h3 class="block-title">Deposit or Withdraw <small></small></h3>
             </div>
             <div class="block-content block-content-full">
                 <!-- Search Form -->
-                <form id="" action="{% url 'fund-deposit' fund.id %}" method="POST">
+                <form id="" action="{% url 'operation-register' register.id %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group row justify-content-center">
                         <div class="col-sm-6 col-xl-4">
                             <div class="form-group">
-                                <label>Amount to be deposited</label>
-                                <input required class="form-control" name="amount" step="0.01" type="number">
+                                <label>Available Amount ({{fund.country.currency}})</label>
+                                <input type="number" class="form-control" disabled name="" value="{{fund.funds}}">
                             </div>
                             <div class="form-group">
-                                <label>Source</label>
-                                <select required class="form-control" id="" name="source">
-                                    <option value="Cash">Cash</option>
-                                    <option value="Other">Other</option>
+                                <label>Operation Type</label>
+                                <select required class="form-control" id="" name="type">
+                                    <option value="1">Deposit</option>
+                                    <option value="0">Withdraw</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Comment</label>
-                                <textarea required class="form-control" name="comment"></textarea>
+                                <label>Amount to be deposited or to be withdrawn</label>
+                                <input required class="form-control" name="amount" step="0.01" type="number">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block">Add</button>
+                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
                             </div>
                         </div>
                     </div>

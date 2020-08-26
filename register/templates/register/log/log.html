@@ -1,4 +1,4 @@
-{% extends "employee/base.html" %} {% load static %} {% block title %} Overview {% endblock %} {% block header %} {% include "account/header/header.html" %} {% endblock %} {% block content %}
+{% extends "employee/base.html" %} {% load static %} {% block title %} Log {% endblock %} {% block header %} {% include "account/header/header.html" %} {% endblock %} {% block content %}
 <!-- Main Container -->
 <main id="main-container">
     <!-- Hero -->
@@ -13,9 +13,9 @@
                         <li class="breadcrumb-item">
                             <a class="link-fx" href="{% url 'account-dashboard'%}">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item">Fund</li>
+                        <li class="breadcrumb-item">Register</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx">List</a>
+                            <a class="link-fx">Log</a>
                         </li>
                     </ol>
                 </nav>
@@ -39,30 +39,40 @@
                     <table class="table table-bordered table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 10%;">
+                                <th class="text-center" style="width: 5%;">
                                     ID
                                 </th>
+                                <th>Created</th>
+                                <th>Previous Balance</th>
+                                <th>Deposit</th>
+                                <th>Withdrew</th>
                                 <th>Balance</th>
-                                <th>Currency</th>
-                                <th class="text-center">Action</th>
+                                <th>Employee</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for s in fund %}
+                            {% for s in logs %}
                             <tr>
                                 <td class="text-center">
                                     {{s.id}}
                                 </td>
                                 <td class="font-w600 font-size-sm">
-                                    {{s.funds}}
+                                    {{s.created}}
                                 </td>
                                 <td class="font-w600 font-size-sm">
-                                    {{s.country.currency}}
+                                    {{s.previous_balance}}
                                 </td>
-                                <td class="text-center">
-                                    <a href="{% url 'fund-deposit' s.id %}">Deposit</a> |
-                                    <a href="{% url 'fund-log' s.id %}">Log</a> |
-                                    <!--<a href="{% url 'fund-delete' s.id %}">Delete</a>-->
+                                <td class="font-w600 font-size-sm">
+                                    {{s.deposited}}
+                                </td>
+                                <td class="font-w600 font-size-sm">
+                                    {{s.withdrew}}
+                                </td>
+                                <td class="font-w600 font-size-sm">
+                                    {{s.actual_balance}}
+                                </td>
+                                <td class="font-w600 font-size-sm">
+                                    {{s.employee}}
                                 </td>
                             </tr>
                             {% endfor %}
@@ -72,33 +82,6 @@
             </div>
         </div>
         <!-- END Dynamic Table Full -->
-        <!--Adding rates-->
-        <div class="block">
-            <div class="block-header">
-                <h3 class="block-title">Add <small></small></h3>
-            </div>
-            <div class="block-content block-content-full">
-                <!-- Search Form -->
-                <form id="" action="{% url 'fund-overview' %}" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group row justify-content-center">
-                        <div class="col-sm-6 col-xl-4">
-                            <div class="form-group">
-                                <label>Day of the Week</label>
-                                <select class="form-control" id="" name="country">
-                                    {% for c in countries %}
-                                    <option value="{{c.id}}">{{c.name}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block">Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
     <!-- END Page Content -->
 </main>

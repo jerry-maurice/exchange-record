@@ -13,6 +13,7 @@ import logging
 logger =  logging.getLogger(__name__)
 
 # Create your views here.
+@login_required
 def fund_overview(request):
     '''
     display the amount of money available for each currency
@@ -46,6 +47,7 @@ def fund_overview(request):
         return render(request, 'authentication/registration/login.html',context)
 
 
+@login_required
 def log_display(request, fund_id):
     '''
     return the list of transactions
@@ -70,6 +72,7 @@ def log_display(request, fund_id):
         return render(request, 'authentication/registration/login.html',context)
 
 
+@login_required
 def fund_deposit(request, fund_id):
     '''
     return the list of transactions
@@ -104,4 +107,21 @@ def fund_deposit(request, fund_id):
         }
         return render(request, 'authentication/registration/login.html',context)
 
-    
+
+@login_required
+def delete_fund(request, fund_id):
+    '''
+    delete fund balance
+    '''
+    user = request.user
+    if Account.objects.filter(user=user).exists():
+        if request.method == 'GET':
+            fund = get_object_or_404(Fund, id=fund_id)
+            fund.delete()
+            return redirect(fund_overview)
+    else:
+        logout(request)
+        context = {
+            'message_authentication':'You are not allowed to access this page'
+        }
+        return render(request, 'authentication/registration/login.html',context)

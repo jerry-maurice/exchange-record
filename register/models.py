@@ -46,7 +46,7 @@ class Register_Log(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     register = models.ForeignKey(Register, on_delete=models.CASCADE, related_name='log_register')
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='employee_register')
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='employee_register', blank=True, null=True)
 
     class Meta:
         ordering = ('-created',)
