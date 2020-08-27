@@ -9,7 +9,11 @@ from account.views import account_dashboard
 
 from employee.views import dashboard
 
+from employee.models import Employee, Schedule
+
 import logging
+from datetime import date,  datetime
+from django.utils import timezone
 
 # get an instance of a logger
 logger =  logging.getLogger(__name__)
@@ -32,11 +36,30 @@ def authentication(request):
                 if verify_account == True:
                     # redirect to  account holder view
                     return redirect(account_dashboard)
-                    logger.info('account holder verified')
                 else:
                     # redirect to employee view
-                    logger.info('account not found')
-                    return  redirect(dashboard)
+                    emp = get_object_or_404(Employee, user=user)
+                    day = timezone.now().weekday()
+                    if Schedule.objects.filter(employee=emp, weekday=(day+1)).exists():
+                        schedule = get_object_or_404(Schedule, employee=emp, weekday=day+1)
+                        # logger.info(timezone.now().time())
+                        # logger.info(datetime.now().time())
+                        start_time = schedule.start_time
+                        end_time  = schedule.end_time
+                        if checkTime(start_time, end_time) == True:
+                            return  redirect(dashboard)
+                        else:
+                            logout(request)
+                            context = {
+                                'message_authentication':'You shift does not start yet'
+                            }
+                            return render(request, 'authentication/registration/login.html',context)
+                    else:
+                        logout(request)
+                        context = {
+                            'message_authentication':'Please contact your manager. You are not schedule to work'
+                        }
+                        return render(request, 'authentication/registration/login.html',context)
         else:
             context = {
                 'message_authentication':'Please try again. User not found'
@@ -67,11 +90,29 @@ def locked(request):
                 if verify_account == True:
                     # redirect to  account holder view
                     return redirect(account_dashboard)
-                    logger.info('account holder verified')
                 else:
                     # redirect to employee view
-                    logger.info('account not found')
-                    return  redirect(dashboard)
+                    emp = get_object_or_404(Employee, user=user)
+                    if Schedule.objects.filter(employee=emp).exists():
+                        day = timezone.now().weekday()
+                        schedule = Schedule.objects.filter(employee=emp, weekday=day)
+                        start_time = schedule.start_time
+                        end_time  = schedule.end_time
+                        if checkTime(start_time, end_time) == True:
+                            return  redirect(dashboard)
+                        else:
+                            logout(request)
+                            context = {
+                                'message_authentication':'You shift does not start yet'
+                            }
+                            return render(request, 'authentication/registration/login.html',context)
+                    else:
+                        logout(request)
+                        context = {
+                            'message_authentication':'Please contact your manager. You are not schedule to work'
+                        }
+                        return render(request, 'authentication/registration/login.html',context)
+
         else:
             logout(request)
             context = {
@@ -88,3 +129,11 @@ def loging_out(request):
     logout(request)
     return redirect(index)
 
+
+def checkTime(start_time, end_time):
+    timenow = datetime.now().time()
+    if timenow >= start_time and timenow <= end_time:
+        return True
+    else:
+        return False
+     

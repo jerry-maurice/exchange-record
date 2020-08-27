@@ -138,7 +138,7 @@ def submit_order(request, order_id, detail_id):
             }
             return render(request, 'sale/message/message.html',context)
         order.status = o_status
-        order.fulfillment = timezone.now()
+        order.fulfillment = datetime.now()
         order.save()
         change_due = float(detail.exchange_total_due) -  float(payment.amount)
         '''
