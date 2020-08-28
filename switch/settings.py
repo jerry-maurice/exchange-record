@@ -180,3 +180,15 @@ LOGGING = {
 #LOGIN_REDIRECT_URL = ''
 LOGIN_URL = '/authenticate/login'
 #LOGOUT_URL = '/authenticate/logout'
+
+EMAIL_BACKEND = 'django_ses.SESBackend'
+
+# These are optional -- if they're set as environment variables they won't
+# need to be set here as well
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+
+# Additionally, if you are not using the default AWS region of us-east-1,
+# you need to specify a region, like so:
+AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME')
+AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
