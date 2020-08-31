@@ -133,6 +133,25 @@ def add_schedule(request, emp_id):
             'message_authentication':'You are not allowed to access this page'
         }
         return render(request, 'authentication/registration/login.html',context)
+
+
+@login_required
+def delete_schedule(request, emp_id, schedule_id):
+    user = request.user
+    if Account.objects.filter(user=user).exists():
+        account = get_object_or_404(Account, user=user)
+        company = get_object_or_404(Company, account=account)
+        employee = get_object_or_404(Employee, id=emp_id)
+        schedule = Schedule.objects.filter(employee=employee, id=schedule_id)
+        if request.method == 'GET':
+            schedule.delete()
+            return redirect(add_schedule, emp_id)
+    else:
+        logout(request)
+        context = {
+            'message_authentication':'You are not allowed to access this page'
+        }
+        return render(request, 'authentication/registration/login.html',context)
         
 
 

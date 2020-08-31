@@ -46,6 +46,7 @@
                                 <th>End Time</th>
                                 <th style="width: 30%;">Task</th>
                                 <th class="text-center" style="width: 15%;">Location</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,6 +65,7 @@
                                 <td class="text-center">
                                     <span class="badge badge-primary">{{s.location.house_number}} {{s.location.address}}</span>
                                 </td>
+                                <td><a href="{% url 'emp-schedule-delete' employee.id s.id %}">Delete</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
