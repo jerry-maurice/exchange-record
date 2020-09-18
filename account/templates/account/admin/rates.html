@@ -43,7 +43,6 @@
                 <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
                         <tr>
-                            <th class="text-center" style="width: 80px;">ID</th>
                             <th class="d-none d-sm-table-cell" style="width: 25%;">Currency (From)</th>
                             <th class="d-none d-sm-table-cell" style="width: 25%;">Currency (To)</th>
                             <th>Price</th>
@@ -55,7 +54,6 @@
                     <tbody>
                         {% for r in rates %}
                         <tr>
-                            <td class="text-center font-size-sm">{{r.id}}</td>
                             <td class="text-center font-size-sm">{{r.from_country.currency}}</td>
                             <td class="text-center font-size-sm">{{r.to_country.currency}}</td>
                             <td class="text-center font-size-sm">{{r.price}}</td>

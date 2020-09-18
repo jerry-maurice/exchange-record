@@ -165,7 +165,6 @@
                         <table class="table table-striped table-hover table-borderless table-vcenter font-size-sm mb-0">
                             <thead>
                                 <tr class="text-uppercase">
-                                    <th class="font-w700" style="width: 80px;">ID</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 100px;">Name</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 100px;">Balance</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Country</th>
@@ -174,9 +173,6 @@
                             <tbody>
                                 {% for r in registers%}
                                 <tr>
-                                    <td>
-                                        <span class="font-w600">#{{r.id}}</span>
-                                    </td>
                                     <td class="d-none d-sm-table-cell text-center">
                                         {{r.identification}}
                                     </td>
@@ -252,7 +248,7 @@
                         <table class="table table-striped table-hover table-borderless table-vcenter font-size-sm mb-0">
                             <thead>
                                 <tr class="text-uppercase">
-                                    <th class="font-w700">ID</th>
+                                    <th class="font-w700">Order</th>
                                     <th class="d-none d-sm-table-cell font-w700">Fulfillment</th>
                                     <th class="font-w700">State</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-right" style="width: 120px;">Client</th>

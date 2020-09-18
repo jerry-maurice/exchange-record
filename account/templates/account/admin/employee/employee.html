@@ -43,7 +43,6 @@
                 <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
                         <tr>
-                            <th class="text-center" style="width: 80px;">ID</th>
                             <th style="width: 15%;">Name</th>
                             <th style="width: 15%;">Date of Birth</th>
                             <th class="d-none d-sm-table-cell" style="width: 10%;">Gender</th>
@@ -56,7 +55,6 @@
                     <tbody>
                         {% for c in employee %}
                         <tr>
-                            <td class="text-center font-size-sm">{{c.id}}</td>
                             <td class="font-w600 font-size-sm">
                                 <a href="{% url 'account-employee-transfer' c.id %}">{{c.user.first_name}} {{c.user.last_name}}</a>
                             </td>

@@ -143,7 +143,7 @@
                         <table class="table table-striped table-hover table-borderless table-vcenter font-size-sm mb-0">
                             <thead>
                                 <tr class="text-uppercase">
-                                    <th class="font-w700" style="width: 80px;">ID</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 100px;">Log #</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 100px;">Deposit</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 100px;">Withdraw</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Balance</th>
@@ -188,7 +188,6 @@
                         <table class="table table-striped table-hover table-borderless table-vcenter font-size-sm mb-0">
                             <thead>
                                 <tr class="text-uppercase">
-                                    <th class="font-w700" style="width: 80px;">ID</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 100px;">Country (From)</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 100px;">Country (To)</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Rate</th>
@@ -197,9 +196,6 @@
                             <tbody>
                                 {% for r in rate%}
                                 <tr>
-                                    <td>
-                                        <span class="font-w600">#{{r.id}}</span>
-                                    </td>
                                     <td class="d-none d-sm-table-cell text-center">
                                         <img class="img-avatar img-avatar32" src="{{r.from_country.flag }}" alt="">
                                     </td>
@@ -230,7 +226,6 @@
                         <table class="table table-striped table-hover table-borderless table-vcenter font-size-sm mb-0">
                             <thead>
                                 <tr class="text-uppercase">
-                                    <th class="font-w700">ID</th>
                                     <th class="d-none d-sm-table-cell font-w700">Date</th>
                                     <th class="font-w700">State</th>
                                     <th class="d-none d-sm-table-cell font-w700 text-right" style="width: 120px;">Client</th>
@@ -240,9 +235,6 @@
                             <tbody>
                                 {% for t in transaction %}
                                 <tr>
-                                    <td>
-                                        <span class="font-w600">#{{t.id}}</span>
-                                    </td>
                                     <td class="d-none d-sm-table-cell">
                                         <span class="font-size-sm text-muted">{{t.fulfillment}}</span>
                                     </td>
