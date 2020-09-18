@@ -124,8 +124,18 @@ def add_schedule(request, emp_id):
             task = request.POST['task']
             location = employee.location
             company = company
-            schedule = Schedule(employee=employee, weekday=weekday, start_time=start_time, end_time=end_time, task=task, location=location)
-            schedule.save()
+            verify_date = Schedule.objects.filter(weekday = request.POST['weekday'],employee=employee).exists()
+            logger.info(verify_date)
+            if verify_date == False:
+                schedule = Schedule(employee=employee, weekday=weekday, start_time=start_time, end_time=end_time, task=task, location=location)
+                schedule.save()
+            else:
+                schedule_date = Schedule.objects.get(employee=employee)
+                schedule_date.start_time = start_time
+                schedule_date.end_time = end_time
+                schedule_date.task = task
+                schedule_date.location = location
+                schedule_date.save()
             return redirect(account_emp_transfer, emp_id)
     else:
         logout(request)
