@@ -15,6 +15,7 @@
             <div class="block-header">
                 <h3 class="block-title">#INV{{order.order.id}}</h3>
                 <div class="block-options">
+                    <a class="mr-5" onclick="printReceipt()">Print Receipt</a>
                     <a class="mr-5" href="" data-toggle="modal" data-target="#modal-block-normal">Modify Invoice</a>
                     <!-- Print Page functionality is initialized in Helpers.print() -->
                     <button type="button" class="btn-block-option" onclick="One.helpers('print');">
@@ -161,4 +162,39 @@
 {% endblock%}
 {% block footer %}
     {% include "footer/footer.html" %}
+{% endblock %}
+{% block script %}
+<script>
+    function printReceipt(){
+        let a = window.open('', '', 'height=500, width=500');
+        let content = document.getElementById('invoice-box').innerHTML;
+        let receipt_content;
+        receipt_content.innerHTML = ""
+        a.document.write('<html>');
+        a.document.write('<body><h1>Switch</h1><br>');
+        a.document.write(
+        '<table>'
+        +'<tr>'
+        +'<td>'
+        +'From {{order.product.from_country.currency}}'
+        +'</td>'
+        +'<td>'
+        +'{{order.quantity}}'
+        +'</td>'
+        +'</tr>'
+        +'<tr>'
+        +'<td>'
+        +'To {{order.product.to_country.currency}}'
+        +'</td>'
+        +'<td>'
+        +'{{order.total_price}}'
+        +'</td>'
+        +'</tr>'
+        +'</table>'
+        );
+        a.document.write('</body></html>');
+        a.document.close();
+        a.print();
+    }
+</script> 
 {% endblock %}
