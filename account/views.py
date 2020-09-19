@@ -107,15 +107,22 @@ def account_profile_password(request):
     if Account.objects.filter(user=user).exists():
         account = get_object_or_404(Account, user=user)
         if request.method == 'POST':
-            if request.POST['password'] and request.POST['password-new'] and request.POST['password-new-confirm'] is not None:
+            password = request.POST['password']
+            password_new = request.POST['password-new']
+            password_new_confirm = request.POST['password-new-confirm']
+            if password is not None and password_new is not None and password_new_confirm is not None:
                 verify = user.check_password(request.POST['password'])
                 if verify == True and request.POST['password-new'] == request.POST['password-new-confirm']:
                     user.set_password(request.POST['password-new'])
+                    user.save()
                     logger.info('user change password')
                     return redirect(account_profile)
                 else:
                     logger.info('wrong password provided')
                     return render(request, 'account/profile/profile.html',{'account':account,'message':'wrong password'})
+            else:
+                logger.info('No password provided')
+                return render(request, 'account/profile/profile.html',{'account':account,'message':'no password provided'})
     else:
         logout(request)
         context = {
