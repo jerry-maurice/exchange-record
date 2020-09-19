@@ -182,6 +182,7 @@ LOGIN_URL = '/authenticate/login'
 #LOGOUT_URL = '/authenticate/logout'
 
 EMAIL_BACKEND = 'django_ses.SESBackend'
+DEFAULT_FROM_EMAIL = "jerrychmaurice@gmail.com"
 
 # These are optional -- if they're set as environment variables they won't
 # need to be set here as well
