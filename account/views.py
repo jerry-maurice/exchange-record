@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
 
 from account.models import Account
 from employee.models import Employee
@@ -114,7 +115,8 @@ def account_profile_password(request):
                 verify = user.check_password(request.POST['password'])
                 if verify == True and request.POST['password-new'] == request.POST['password-new-confirm']:
                     user.set_password(request.POST['password-new'])
-                    user.save()
+                    update_session_auth_hash(request, user)
+                    request.user.save(update_fields=['password'])
                     logger.info('user change password')
                     return redirect(account_profile)
                 else:
