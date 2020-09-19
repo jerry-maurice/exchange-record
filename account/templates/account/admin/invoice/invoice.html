@@ -33,7 +33,6 @@
                             <address>
                                 {{order.order.location.house_number}} {{order.order.location.address}}<br>
                                 {{order.order.location.city}}, {{order.order.location.state}}<br>
-                                {{order.order.location.address}}<br>
                                 {{order.order.location.country}}
                             </address>
                         </div>
@@ -169,11 +168,17 @@
         let a = window.open('', '', 'height=500, width=500');
         a.document.write('<html>');
         a.document.write('<body><h1>Switch</h1><br>');
+        a.document.write('<h3>{{company}}</h3>');
+        a.document.write('<br /><i>{{order.order.location.house_number}}</i>');
+        a.document.write('<br /><i>{{order.order.location.address}}</i>');
+        a.document.write('<br /><i>{{order.order.location.city}}</i>');
+        a.document.write('<br />____________')
+        a.document.write('<br />')
         a.document.write(
         '<table>'
         +'<tr>'
         +'<td>'
-        +'De {{order.product.from_country.currency}}'
+        +'From {{order.product.from_country.currency}}'
         +'</td>'
         +'<td>'
         +'{{order.quantity}}'
@@ -181,7 +186,7 @@
         +'</tr>'
         +'<tr>'
         +'<td>'
-        +'Vers {{order.product.to_country.currency}}'
+        +'To {{order.product.to_country.currency}}'
         +'</td>'
         +'<td>'
         +'{{order.total_price}}'
@@ -189,9 +194,12 @@
         +'</tr>'
         +'</table>'
         );
+        a.document.write('<br />')
+        a.document.write('<i>Thank you very much for doing business with us. We look forward to working with you again!</i>')
         a.document.write('</body></html>');
         a.document.close();
         a.print();
     }
 </script> 
 {% endblock %}
+
