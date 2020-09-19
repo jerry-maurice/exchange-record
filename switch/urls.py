@@ -29,6 +29,7 @@ urlpatterns = [
     path('support/',  include('support.urls')),
     path('account/',  include('account.urls')),
     path('fund/',  include('fund.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 handler404 = 'employee.views.handler404'
 handler500 = 'employee.views.handler505'
