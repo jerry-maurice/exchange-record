@@ -39,9 +39,12 @@ def authentication(request):
                 else:
                     # redirect to employee view
                     emp = get_object_or_404(Employee, user=user)
-                    day = timezone.now().weekday()
-                    if Schedule.objects.filter(employee=emp, weekday=(day+1)).exists():
-                        schedule = get_object_or_404(Schedule, employee=emp, weekday=day+1)
+                    day = (timezone.now().weekday())+1
+                    if day == 7:
+                        day = 0
+                    logger.info(Schedule.objects.filter(employee=emp, weekday=(day)).exists())
+                    if Schedule.objects.filter(employee=emp, weekday=(day)).exists():
+                        schedule = get_object_or_404(Schedule, employee=emp, weekday=day)
                         # logger.info(timezone.now().time())
                         # logger.info(datetime.now().time())
                         start_time = schedule.start_time
