@@ -44,6 +44,26 @@ def search_client(request):
 
 
 @login_required
+def verify_search_client(request):
+    '''
+    search client to start the application
+    '''
+    user = request.user
+    employee = get_object_or_404(Employee, user=user)
+    company = employee.company
+    location = employee.location
+    if request.method == 'POST':
+        client_optional = request.POST['optional']
+        logger.info(client_optional)
+        if client_optional is not None:
+            client = Client.objects.get(first_name="unknown", company=company)
+            logger.info(client)
+            status = Transaction_Status.objects.get(name="STARTING..")
+            order = Order(customer=client, employee=employee, location=location, status=status)
+            order.save()
+            return redirect(order_detail, order_id=order.id)
+
+@login_required
 def order_detail(request, order_id):
     '''
     part 2 of the exchange app

@@ -19,11 +19,21 @@
                         <h2 class="h3 font-w300 text-muted invisible mb-5" data-toggle="appear" data-class="animated fadeInUp">Search Client  by entering their phone number</h2>
                         <!-- END Header -->
                         <!-- Form Inline - Default Style -->
-                        <form class="mb-4" action="{% url 'app-search-client'%}" method="POST" onsubmit="return true;">
+                        <form id="search_client" class="mb-4" action="{% url 'app-search-client'%}" method="POST" onsubmit="return true;">
                             {% csrf_token %}
                             <label class="sr-only" for="example-if-email">Phone</label>
                             <input required type="tel" class="form-control mb-4 mr-sm-4 text-center" id="" name="phone" placeholder="Phone">
                             <button type="submit" class="btn btn-danger">Search</button>
+                        </form>
+                    </div>
+                    <divclass="py-4">
+                        <!-- Form Inline - Default Style -->
+                        <form id="verify_search_client"  class="mb-4" action="{% url 'verify-search-client'%}" method="POST" onsubmit="return true;">
+                            {% csrf_token %}
+                            <label class="form-control"> Would you like to search for client?</label>
+                            <input type="hidden" class="form-control mb-4 mr-sm-4 text-center" id="" name="optional" value=0>
+                            <button type="submit" class="btn btn-danger">No</button>
+                            <button type="button" id="yes_search" class="btn btn-danger">Yes</button>
                         </form>
                     </div>
                 </div>
@@ -36,4 +46,19 @@
 {% endblock%}
 {% block footer %}
     {% include "footer/footer.html" %}
+{% endblock %}
+{% block  script %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const clientsearch =  document.getElementById('search_client');
+            clientsearch.style.display = "none";
+            
+            const yes_search = document.getElementById('yes_search');
+            yes_search.addEventListener("click", function(e){
+                document.getElementById("verify_search_client"). style.display = "none";
+                clientsearch.style.display = "initial";
+            });
+
+        });
+    </script>
 {% endblock %}
